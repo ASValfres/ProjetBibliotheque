@@ -1,4 +1,4 @@
-package projet; blblabla
+package projet; BONJOUR MONSIEUR
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
