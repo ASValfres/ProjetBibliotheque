@@ -10,6 +10,8 @@ import java.util.Iterator;
 public class Bibliotheque implements Serializable {
 
     private static final long serialVersionUID = 262L;
+    private static int dernierExemplaire;
+    private static int dernierLecteur;
 
     // -----------------------------------------------
     //Attributs
@@ -44,11 +46,10 @@ public class Bibliotheque implements Serializable {
 		 * afin de garantir la cohérence des données.
      */
     public void nouveauLecteur() {
-        Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero de lecteur :");
+  
+        dernierLecteur = dernierLecteur + 1;
+        
 
-        Lecteur L = unLecteur(numLecteur);
-
-        if (L == null) {
             String nom = EntreesSorties.lireChaine("Entrez le nom :");
             String prenom = EntreesSorties.lireChaine("Entrez le prenom :");
             Integer age;
@@ -63,7 +64,7 @@ public class Bibliotheque implements Serializable {
                     age = dateActuelle.get(GregorianCalendar.YEAR) - dateNaiss.get(GregorianCalendar.YEAR) - 1;
                 }
                 if ((age <= 3) | (age >= 110)) {
-                    EntreesSorties.afficherMessage("Age incorrecte (" + age + "), veuillez recommencer.");
+                    EntreesSorties.afficherMessage("Age incorrect (" + age + "), veuillez recommencer.");
                 } else {
                     EntreesSorties.afficherMessage("Age du lecteur : " + age + " ans");
                 }
@@ -72,11 +73,9 @@ public class Bibliotheque implements Serializable {
             String tel = EntreesSorties.lireChaine("Entrez le numero de telephone :");
             EntreesSorties.afficherMessage("Fin de saisie");
 
-            L = new Lecteur(nom, prenom, numLecteur, dateNaiss, adresse, tel);
-            lierLecteur(L, numLecteur);
-        } else {
-            EntreesSorties.afficherMessage("Ce numero de lecteur existe deja.");
-        }
+            Lecteur L = new Lecteur(nom, prenom, dernierLecteur, dateNaiss, adresse, tel);
+            lierLecteur(L, dernierLecteur);
+
 
     }
 
