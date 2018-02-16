@@ -6,44 +6,61 @@
 package projet;
 
 import java.util.Date;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /**
  *
  * @author valfres
  */
 public class Exemplaire {
-    private Boolean _empruntable;
-    private int _numeroexemplaire;
-    private Date _datereception;
+    private Boolean empruntable;
+    private int numeroexemplaire;
+    private GregorianCalendar datereception;
+    private Ouvrage ouvrage;
     
-    public Exemplaire(Ouvrage ouvrage, Boolean empruntable,Date dateReception, int numeroExemplaire){
-        this._empruntable=empruntable;
-        this._numeroexemplaire=numeroExemplaire;
-        this._datereception=dateReception;
-        lierExemplaireOuvrage(ouvrage);
+    public Exemplaire(Ouvrage ouvrage, Boolean empruntable,GregorianCalendar dateReception, int numeroExemplaire){
+        this.empruntable=empruntable;
+        this.numeroexemplaire=numeroExemplaire;
+        this.datereception=dateReception;
+        this.ouvrage=ouvrage;
+        ouvrage.dernierExemplaire++;
+        ouvrage.lierExemplaireOuvrage(this);
     }
     
-    public Exemplaire getExemplaire(int ISBN, int numeroExemplaire){
-        Exemplaire exemplaire=new Exemplaire();
-        exemplaire=getExemplaire(ISBN, numeroExemplaire);
-        return exemplaire;
-    }
+
     
     public void afficherInfos(int ISBN, int numeroExemplaire){
-        Exemplaire exemplaire=new Exemplaire();
-        exemplaire=getExemplaire(ISBN, numeroExemplaire);
+        Exemplaire exemplaire=getOuvrage(ISBN).getExemplaire(numeroExemplaire);
         
-        System.out.println("\nNuméro exemplaire :"+exemplaire._numeroexemplaire);
-        if(exemplaire._empruntable){
+        System.out.println("\nNuméro exemplaire :"+exemplaire.numeroexemplaire);
+        if(exemplaire.empruntable){
             System.out.println("Empruntable");
         }
         else{
             System.out.println("Non empruntable");
         }
-        System.out.println("Date reception : "+exemplaire._datereception);
+        System.out.println("Date reception : "+exemplaire.datereception);
            
     }
     
-    public void afficherExem
+    
+    public void afficherExememplaire(){
+        System.out.println("Infos ouvrage :"+this.ouvrage.afficheReduit());
+        
+        //faire un itérateur qui prends tout les Exemplaire de l'Array list ou
+        // de ensemble[Exemplaires] et qui affiche les infos de chaque
+        
+        for (int i=0;i<this.ouvrage.exemplaires.size();i++){
+            System.out.println("\nNuméro exemplaire :"+this.numeroexemplaire);
+            if(this.empruntable){
+                System.out.println("Empruntable");
+            }
+            else{
+                System.out.println("Non empruntable");
+            }
+            System.out.println("Date reception : "+this.datereception);
+        }
+    }
     
 }
