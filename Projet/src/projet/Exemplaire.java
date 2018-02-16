@@ -24,7 +24,7 @@ public class Exemplaire {
         this.numeroexemplaire=numeroExemplaire;
         this.datereception=dateReception;
         this.ouvrage=ouvrage;
-        ouvrage.dernierExemplaire++;
+        ouvrage.incrementationNbEx();
         ouvrage.lierExemplaireOuvrage(this);
     }
     
@@ -46,7 +46,7 @@ public class Exemplaire {
     
     
     public void afficherExememplaire(){
-        System.out.println("Infos ouvrage :"+this.ouvrage.afficheReduit());
+        this.ouvrage.afficherReduit();
         
         //faire un itérateur qui prends tout les Exemplaire de l'Array list ou
         // de ensemble[Exemplaires] et qui affiche les infos de chaque
