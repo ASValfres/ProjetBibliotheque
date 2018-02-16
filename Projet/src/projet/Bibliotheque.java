@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class Bibliotheque implements Serializable {
 
     private static final long serialVersionUID = 262L;
-    private static int dernierExemplaire;
+    
     private static int dernierLecteur;
 
     // -----------------------------------------------
