@@ -1,4 +1,7 @@
-package projet; BONJOUR MONSIEUR PATATE DOUCE
+package projet;
+
+
+please faites que ca marche !!
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
