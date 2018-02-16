@@ -10,5 +10,5 @@ package projet;
  * @author valfres
  */
 public class Exemplaire {
-    
+    bonjour
 }
