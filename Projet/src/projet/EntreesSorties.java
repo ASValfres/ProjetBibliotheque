@@ -183,6 +183,19 @@ public class EntreesSorties {
             return 0;
         }
     } // Fin de lireFlottant
+    
+    public static boolean lireBool(  String libelle){
+
+      
+        if (libelle == "t"){
+            return true;
+        } 
+        else if (libelle == "f"){
+            return false;
+        }
+        else System.out.println("ATTENTION, RISQUE D'ERREUR SUR LA VARIABLE EMPRUNTABLE. MIS SUR NON EMPRUNTABLE PAR DEFAUT !");
+            return false;
+    }
 
     /**
      * Affiche un libellé puis permet la saisie d'un réel. Si l'utilisateur
