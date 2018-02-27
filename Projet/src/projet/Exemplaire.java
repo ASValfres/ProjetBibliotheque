@@ -45,6 +45,11 @@ public class Exemplaire {
             }
             System.out.println("Date reception : "+this.datereception);
         
+            
+    }
+    
+    public void lierOuvrageExemplaire(Ouvrage o){
+        this.ouvrage=o;
     }
     
 }
