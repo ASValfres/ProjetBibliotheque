@@ -15,16 +15,15 @@ import java.util.GregorianCalendar;
 public class Ouvrage {
     
     private static int dernierExemplaire;
-    
     private ArrayList<Exemplaire> exemplaires;
     private int ISBN;
     private String titre;
     private String nomEditeur;
-    private Date dateParution;
+    private GregorianCalendar dateParution;
     private Public publif;
     private String nomAuteur;
     
-    public Ouvrage(int ISBN, String titre, String nomEditeur, Date dateParution, String nomAuteur, Public publif){
+    public Ouvrage(int ISBN, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publif){
 
         this.ISBN = ISBN;
         this.titre = titre;
@@ -46,7 +45,11 @@ public class Ouvrage {
     public void incrementationNbEx(){
         dernierExemplaire += 1;
     }
-    
+    public void afficherExemplaire(){
+        for (int i=0;i<this.getExemplaire().size();i++){
+            exemplaires.get(i).afficherExemplaire();
+        }
+    }
     public void afficherInfos(){
         System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN + "\n écrit par :" + nomAuteur + "\n Edité par : "+ nomEditeur + "\n Paru le : "+ dateParution+ "\n Destiné à un public : "+publif);
     }
@@ -57,7 +60,6 @@ public class Ouvrage {
     
     public void afficherReduit(){
         System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN );
- 
     }
     
     public void nouvelExemplaire(){
