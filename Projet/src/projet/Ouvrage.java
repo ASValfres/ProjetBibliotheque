@@ -35,6 +35,9 @@ public class Ouvrage {
         exemplaires = new ArrayList<>();
     }
     
+    public ArrayList getExemplaire(){
+        return this.exemplaires;
+    }
     public void incrementationNbEx(){
         dernierExemplaire += 1;
     }
@@ -58,7 +61,8 @@ public class Ouvrage {
         boolean empruntable = EntreesSorties.lireBool("Entrez la variable emprntable. t pour oui f pour non : :");
         
         this.incrementationNbEx();
-        Exemplaire e = new Exemplaire()
+        
+        Exemplaire e = new Exemplaire(this, empruntable, dateReception, dernierExemplaire);
     
     }
 }
