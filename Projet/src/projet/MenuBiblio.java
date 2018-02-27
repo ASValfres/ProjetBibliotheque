@@ -20,6 +20,8 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("|                   Menu Principal                       |");
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Menu Lecteur : 1                                       |");
+            EntreesSorties.afficherMessage("| Menu Ouvrage : 2                                       |");
+            EntreesSorties.afficherMessage("| Menu Exemplaire : 3                                    |");
             EntreesSorties.afficherMessage("| Quitter : 0                                            |");
             EntreesSorties.afficherMessage(" ========================================================");
             menu = EntreesSorties.lireEntier();
@@ -29,7 +31,14 @@ public class MenuBiblio {
                     this.menuLecteur();
                     break;
                 }
-
+                case 2: {
+                    this.menuOuvrage();
+                    break;
+                }
+                case 3: {
+                    this.menuExemplaire();
+                    break;
+                }
                 default: {
                     break;
                 }
@@ -67,6 +76,61 @@ public class MenuBiblio {
                 }
             }
         } while (menuLect != 0);
+    }
+    
+    public void menuOuvrage() {
+        Integer menuOuv;
+        do {
+            EntreesSorties.afficherMessage(" ========================================================");
+            EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+            EntreesSorties.afficherMessage("| Nouvel ouvrage : 1                                     |");
+            EntreesSorties.afficherMessage("| Consulter ouvrage : 2                                  |");
+            EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+            EntreesSorties.afficherMessage(" ========================================================");
+            menuOuv = EntreesSorties.lireEntier();
+
+            switch (menuOuv) {
+                case 1: {
+                    bibliotheque.nouvelOuvrage();
+                    break;
+                }
+                case 2: {
+                    bibliotheque.consulterOuvrage();
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+        } while (menuOuv != 0);
+    }
+    
+    public void menuExemplaire() {
+        Integer menuEx;
+        do {
+            EntreesSorties.afficherMessage(" ========================================================");
+            EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+            EntreesSorties.afficherMessage("| Nouvel exemplaire : 1                                  |");
+            EntreesSorties.afficherMessage("| Consulter exemplaire : 2                               |");
+            EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+            EntreesSorties.afficherMessage(" ========================================================");
+            menuEx = EntreesSorties.lireEntier();
+
+            switch (menuEx) {
+                case 1: {
+                    
+                    bibliotheque.nouvelExemplaire();
+                    break;
+                }
+                case 2: {
+                    bibliotheque.consulterExemplaireOuvrage();
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+        } while (menuEx != 0);
     }
 
 }
