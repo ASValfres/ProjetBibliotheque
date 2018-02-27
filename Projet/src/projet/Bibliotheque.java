@@ -2,6 +2,7 @@
 package projet;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,9 +33,10 @@ public class Bibliotheque implements Serializable {
 
     }
 
-// -----------------------------------------------
-    // Public
-// -----------------------------------------------	
+             // -----------------------------------------------
+             //                      Lecteur
+            // -----------------------------------------------	
+    
     // -----------------------------------------------
     // Methodes
     // -----------------------------------------------
@@ -135,7 +137,48 @@ public class Bibliotheque implements Serializable {
         return dicoLecteur.values().iterator();
     }
     
-    public Ouvrage getOuvrage(Integer ISBN){
-        return 
+    
+    
+           // -----------------------------------------------
+           //                     Ouvrage
+           // -----------------------------------------------	
+    
+    public void NouvelOuvrage(){
+        int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
+        String titre = EntreesSorties.lireChaine("Entrez le titre : ");
+        String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
+        GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
+        String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
+        String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
+        
+        EntreesSorties.afficherMessage("Fin de saisie");
+        Public publif;
+        if (publicConcerné.toUpperCase()=="ENF"){
+            publif.;
+        }
+        Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
+        lierOuvrageBibliotheque(O, dernierLecteur);
     }
+    
+    //int ISBN, String titre, String nomEditeur, Date dateParution, String nomAuteur, Public publif
+    
+    
+    public void ConsulterOuvrage(){
+        
+    }
+    
+    
+    
+    private Ouvrage getOuvrage(Integer ISBN){
+        return dicoOuvrage.get(ISBN);
+    }
+    
+    private void lierOuvrageBibliotheque(Ouvrage o,int ISBN){
+        dicoOuvrage.put(ISBN, o);
+    }
+    
+    
+    
+    
+    
 }
