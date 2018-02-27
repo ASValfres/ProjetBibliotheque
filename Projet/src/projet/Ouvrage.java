@@ -55,7 +55,7 @@ public class Ouvrage {
     }
     
     public void lierExemplaireOuvrage(Exemplaire e){
-        
+        this.exemplaires.add(e);
     }
     
     public void afficherReduit(){
