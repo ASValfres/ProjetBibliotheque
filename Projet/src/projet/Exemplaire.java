@@ -30,7 +30,7 @@ public class Exemplaire {
     
 
     
-    public void afficherInfos(int ISBN, int numeroExemplaire){
+    public void afficherInfos(){
         Exemplaire exemplaire=getOuvrage(ISBN).getExemplaire(numeroExemplaire);
         
         System.out.println("\nNuméro exemplaire :"+exemplaire.numeroexemplaire);
