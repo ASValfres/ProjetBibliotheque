@@ -12,11 +12,13 @@ public class Bibliotheque implements Serializable {
     private static final long serialVersionUID = 262L;
     
     private static int dernierLecteur;
+    
 
     // -----------------------------------------------
     //Attributs
     // -----------------------------------------------
-    private HashMap<Integer, Lecteur> _dicoLecteur;
+    private HashMap<Integer, Lecteur> dicoLecteur;
+    private HashMap<Integer, Lecteur> dicoOuvrage;
 
     /*
 		 * Le dictionnaire de lecteur permet à bibliotheque de 
@@ -104,7 +106,7 @@ public class Bibliotheque implements Serializable {
     // Setters
     // -----------------------------------------------
     private void setLecteurs(HashMap<Integer, Lecteur> dicoLecteur) {
-        _dicoLecteur = dicoLecteur;
+        dicoLecteur = dicoLecteur;
     }
 
     // -----------------------------------------------
@@ -115,14 +117,14 @@ public class Bibliotheque implements Serializable {
 	 * lecteur identifié par son numéro, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
      */
     private Lecteur unLecteur(Integer numLecteur) {
-        return _dicoLecteur.get(numLecteur);
+        return dicoLecteur.get(numLecteur);
     }
 
     /*
 	 * La méthode lierLecteur permet d'ajouter un lecteur a la base de donnée de bibliotheque.
      */
     private void lierLecteur(Lecteur L, Integer numLecteur) {
-        _dicoLecteur.put(numLecteur, L);
+        dicoLecteur.put(numLecteur, L);
     }
 
     /*
@@ -130,6 +132,10 @@ public class Bibliotheque implements Serializable {
 	 * pour eventuellement les relancer.
      */
     private Iterator<Lecteur> lesLecteurs() {
-        return _dicoLecteur.values().iterator();
+        return dicoLecteur.values().iterator();
+    }
+    
+    public Ouvrage getOuvrage(Integer ISBN){
+        return 
     }
 }
