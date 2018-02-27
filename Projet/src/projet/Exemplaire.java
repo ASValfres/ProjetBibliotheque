@@ -28,30 +28,14 @@ public class Exemplaire {
         ouvrage.lierExemplaireOuvrage(this);
     }
     
-
     
-    public void afficherInfos(){
-        Exemplaire exemplaire=getOuvrage(ISBN).getExemplaire(numeroExemplaire);
+    public void afficherExemplaire(){
         
-        System.out.println("\nNuméro exemplaire :"+exemplaire.numeroexemplaire);
-        if(exemplaire.empruntable){
-            System.out.println("Empruntable");
-        }
-        else{
-            System.out.println("Non empruntable");
-        }
-        System.out.println("Date reception : "+exemplaire.datereception);
-           
-    }
-    
-    
-    public void afficherExememplaire(){
-        this.ouvrage.afficherReduit();
         
         //faire un itérateur qui prends tout les Exemplaire de l'Array list ou
         // de ensemble[Exemplaires] et qui affiche les infos de chaque
         
-        for (int i=0;i<this.ouvrage.getExemplaire().size();i++){
+        
             System.out.println("\nNuméro exemplaire :"+this.numeroexemplaire);
             if(this.empruntable){
                 System.out.println("Empruntable");
@@ -60,7 +44,7 @@ public class Exemplaire {
                 System.out.println("Non empruntable");
             }
             System.out.println("Date reception : "+this.datereception);
-        }
+        
     }
     
 }
