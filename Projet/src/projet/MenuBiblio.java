@@ -3,10 +3,10 @@ package projet;
 
 public class MenuBiblio {
 
-    private Bibliotheque _bibliotheque;
+    private Bibliotheque bibliotheque;
 
     public MenuBiblio(Bibliotheque bibliotheque) {
-        _bibliotheque = bibliotheque;
+        bibliotheque = bibliotheque;
     }
 
     /*
@@ -55,11 +55,11 @@ public class MenuBiblio {
 
             switch (menuLect) {
                 case 1: {
-                    _bibliotheque.nouveauLecteur();
+                    bibliotheque.nouveauLecteur();
                     break;
                 }
                 case 2: {
-                    _bibliotheque.consulterLecteur();
+                    bibliotheque.consulterLecteur();
                     break;
                 }
                 default: {
