@@ -78,7 +78,7 @@ public class Bibliotheque implements Serializable {
             EntreesSorties.afficherMessage("Fin de saisie");
 
             Lecteur L = new Lecteur(nom, prenom, dernierLecteur, dateNaiss, adresse, tel);
-            lierLecteur(L, dernierLecteur);
+            lierLecteurBibliotheque(L, dernierLecteur);
 
 
     }
@@ -92,7 +92,7 @@ public class Bibliotheque implements Serializable {
     public void consulterLecteur() {
         Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
 
-        Lecteur L = unLecteur(numLecteur);
+        Lecteur L = getLecteur(numLecteur);
 
         if (L != null) {
             L.afficherLecteur();
@@ -115,17 +115,17 @@ public class Bibliotheque implements Serializable {
     // Mï¿½thodes
     // -----------------------------------------------
     /*
-	 * La méthode unLecteur permet de rechercher dans la base de donnée de bibliotheque un objet 
+	 * La méthode getLecteur permet de rechercher dans la base de donnée de bibliotheque un objet 
 	 * lecteur identifié par son numéro, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
      */
-    private Lecteur unLecteur(Integer numLecteur) {
+    private Lecteur getLecteur(Integer numLecteur) {
         return dicoLecteur.get(numLecteur);
     }
 
     /*
-	 * La méthode lierLecteur permet d'ajouter un lecteur a la base de donnée de bibliotheque.
+	 * La méthode lierLecteurBibliotheque permet d'ajouter un lecteur a la base de donnée de bibliotheque.
      */
-    private void lierLecteur(Lecteur L, Integer numLecteur) {
+    private void lierLecteurBibliotheque(Lecteur L, Integer numLecteur) {
         dicoLecteur.put(numLecteur, L);
     }
 
@@ -143,19 +143,34 @@ public class Bibliotheque implements Serializable {
            //                     Ouvrage
            // -----------------------------------------------	
     
-    public void NouvelOuvrage(){
+    public void nouvelOuvrage(){
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         String titre = EntreesSorties.lireChaine("Entrez le titre : ");
         String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
         GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
+
         String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
         String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
         
         EntreesSorties.afficherMessage("Fin de saisie");
         Public publif;
-        if (publicConcerné.toUpperCase()=="ENF"){
-            publif.;
+   
+        switch(publicConcerné.toUpperCase()){
+            case "ENF":
+                publif=Public.enfant;
+                break;
+            case "ADU":
+                publif=Public.adulte;
+                break;
+            case "ADO":
+                publif=Public.adulte;
+                break;
+            default:
+                publif=Public.adulte;
         }
+                
+        
+        
         Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
         lierOuvrageBibliotheque(O, dernierLecteur);
     }
@@ -163,8 +178,15 @@ public class Bibliotheque implements Serializable {
     //int ISBN, String titre, String nomEditeur, Date dateParution, String nomAuteur, Public publif
     
     
-    public void ConsulterOuvrage(){
-        
+    public void consulterOuvrage(){
+       Integer ISBN = EntreesSorties.lireEntier("Entrez le numero ISBN de l'ouvrage que vous souhaitez consulter : ");
+       Ouvrage O=getOuvrage(ISBN);
+       
+       if (O != null) {
+           O.afficherInfos();
+       } else {
+           EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero ISBN.");
+        }
     }
     
     
@@ -178,7 +200,5 @@ public class Bibliotheque implements Serializable {
     }
     
     
-    
-    
-    
+  
 }
