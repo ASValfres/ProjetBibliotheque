@@ -38,6 +38,11 @@ public class Ouvrage {
     public ArrayList getExemplaire(){
         return this.exemplaires;
     }
+    
+    public Public getPublic(){
+       return this.publif;
+    }
+    
     public void incrementationNbEx(){
         dernierExemplaire += 1;
     }
@@ -47,7 +52,6 @@ public class Ouvrage {
     }
     
     public void lierExemplaireOuvrage(Exemplaire e){
-        
         
     }
     
@@ -63,7 +67,6 @@ public class Ouvrage {
         this.incrementationNbEx();
         
         Exemplaire e = new Exemplaire(this, empruntable, dateReception, dernierExemplaire);
-    
     }
 }
                        
