@@ -62,13 +62,14 @@ public class Ouvrage {
         System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN );
     }
     
-    public void nouvelExemplaire(){
-        GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de reception :");
-        boolean empruntable = EntreesSorties.lireBool("Entrez la variable emprntable. t pour oui f pour non : :");
+    public void nouvelExemplaire(GregorianCalendar dateReception, boolean empruntable){
+
         
         this.incrementationNbEx();
         
         Exemplaire e = new Exemplaire(this, empruntable, dateReception, dernierExemplaire);
+        this.lierExemplaireOuvrage(e);
+        e.lierOuvrageExemplaire(this);
     }
 }
                        
