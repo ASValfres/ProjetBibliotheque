@@ -51,7 +51,7 @@ public class Exemplaire {
         //faire un itérateur qui prends tout les Exemplaire de l'Array list ou
         // de ensemble[Exemplaires] et qui affiche les infos de chaque
         
-        for (int i=0;i<this.ouvrage.exemplaires.size();i++){
+        for (int i=0;i<this.ouvrage.getExemplaire().size();i++){
             System.out.println("\nNuméro exemplaire :"+this.numeroexemplaire);
             if(this.empruntable){
                 System.out.println("Empruntable");
