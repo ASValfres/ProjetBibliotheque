@@ -1,4 +1,3 @@
-
 package projet;
 
 import java.io.Serializable;
@@ -11,9 +10,9 @@ import java.util.Iterator;
 public class Bibliotheque implements Serializable {
 
     private static final long serialVersionUID = 262L;
-    
+   
     private static int dernierLecteur;
-    
+   
 
     // -----------------------------------------------
     //Attributs
@@ -22,8 +21,8 @@ public class Bibliotheque implements Serializable {
     private HashMap<Integer, Ouvrage> dicoOuvrage;
 
     /*
-		 * Le dictionnaire de lecteur permet à bibliotheque de 
-		 * garantir l'unicité de ces derniers, et facilitent les recherches et créations.
+   * Le dictionnaire de lecteur permet à bibliotheque de
+   * garantir l'unicité de ces derniers, et facilitent les recherches et créations.
      */
     // -----------------------------------------------
     //Constructeur
@@ -35,24 +34,24 @@ public class Bibliotheque implements Serializable {
 
              // -----------------------------------------------
              //                      Lecteur
-            // -----------------------------------------------	
-    
+            // ----------------------------------------------- 
+   
     // -----------------------------------------------
     // Methodes
     // -----------------------------------------------
     /*
-		 * La méthode nouveauLecteur permet de créé un lecteur en demandant la saisie de son numéro
-		 * nom, prénom, date de naissance, adresse et numéro de téléphone.
-		 * L'age doit être compris entre 3 et 110 ans
-		 * Le lecteur est identifié par son numéro, si celui ci existe déjà dans le dictionnaire
-		 * de bibliothèque, un message d'erreur est affiché.
-		 * Une fois le nouveau lecteur créé, il est ajouté au dictionnaire de lecteur
-		 * afin de garantir la cohérence des données.
+   * La méthode nouveauLecteur permet de créé un lecteur en demandant la saisie de son numéro
+   * nom, prénom, date de naissance, adresse et numéro de téléphone.
+   * L'age doit être compris entre 3 et 110 ans
+   * Le lecteur est identifié par son numéro, si celui ci existe déjà dans le dictionnaire
+   * de bibliothèque, un message d'erreur est affiché.
+   * Une fois le nouveau lecteur créé, il est ajouté au dictionnaire de lecteur
+   * afin de garantir la cohérence des données.
      */
     public void nouveauLecteur() {
-  
+ 
         dernierLecteur = dernierLecteur + 1;
-        
+       
 
             String nom = EntreesSorties.lireChaine("Entrez le nom :");
             String prenom = EntreesSorties.lireChaine("Entrez le prenom :");
@@ -84,10 +83,10 @@ public class Bibliotheque implements Serializable {
     }
 
     /*
-	 * La méthode consulterLecteur permet d'afficher l'ensemble des informations relatives à
-	 * un lecteur, par la saisie de son identifiant (numéro de lecteur).
-	 * Si le numéro de lecteur n'est pas dans la base de données de bibliotheque un message d'erreur est
-	 * renvoyé a l'utilisateur.
+  * La méthode consulterLecteur permet d'afficher l'ensemble des informations relatives à
+  * un lecteur, par la saisie de son identifiant (numéro de lecteur).
+  * Si le numéro de lecteur n'est pas dans la base de données de bibliotheque un message d'erreur est
+  * renvoyé a l'utilisateur.
      */
     public void consulterLecteur() {
         Integer numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur : ");
@@ -115,34 +114,34 @@ public class Bibliotheque implements Serializable {
     // Mï¿½thodes
     // -----------------------------------------------
     /*
-	 * La méthode getLecteur permet de rechercher dans la base de donnée de bibliotheque un objet 
-	 * lecteur identifié par son numéro, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
+  * La méthode getLecteur permet de rechercher dans la base de donnée de bibliotheque un objet
+  * lecteur identifié par son numéro, et de renvoyer l'objet. (ou la donnée null s'il n'est pas trouvé)
      */
     private Lecteur getLecteur(Integer numLecteur) {
         return dicoLecteur.get(numLecteur);
     }
 
     /*
-	 * La méthode lierLecteurBibliotheque permet d'ajouter un lecteur a la base de donnée de bibliotheque.
+  * La méthode lierLecteurBibliotheque permet d'ajouter un lecteur a la base de donnée de bibliotheque.
      */
     private void lierLecteurBibliotheque(Lecteur L, Integer numLecteur) {
         dicoLecteur.put(numLecteur, L);
     }
 
     /*
-	 * La méthode lesLecteurs permet de créer un iterator sur les lecteurs, dans le but de les parcourir
-	 * pour eventuellement les relancer.
+  * La méthode lesLecteurs permet de créer un iterator sur les lecteurs, dans le but de les parcourir
+  * pour eventuellement les relancer.
      */
     private Iterator<Lecteur> lesLecteurs() {
         return dicoLecteur.values().iterator();
     }
-    
-    
-    
+   
+   
+   
            // -----------------------------------------------
            //                     Ouvrage
-           // -----------------------------------------------	
-    
+           // ----------------------------------------------- 
+   
     public void nouvelOuvrage(){
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         String titre = EntreesSorties.lireChaine("Entrez le titre : ");
@@ -151,10 +150,10 @@ public class Bibliotheque implements Serializable {
 
         String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
         String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
-        
+       
         EntreesSorties.afficherMessage("Fin de saisie");
         Public publif;
-   
+  
         switch(publicConcerné.toUpperCase()){
             case "ENF":
                 publif=Public.enfant;
@@ -168,37 +167,62 @@ public class Bibliotheque implements Serializable {
             default:
                 publif=Public.adulte;
         }
-                
-        
-        
+               
+       
+       
         Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
         lierOuvrageBibliotheque(O, dernierLecteur);
     }
-    
+   
     //int ISBN, String titre, String nomEditeur, Date dateParution, String nomAuteur, Public publif
-    
-    
+   
+   
     public void consulterOuvrage(){
        Integer ISBN = EntreesSorties.lireEntier("Entrez le numero ISBN de l'ouvrage que vous souhaitez consulter : ");
        Ouvrage O=getOuvrage(ISBN);
-       
+      
        if (O != null) {
            O.afficherInfos();
        } else {
            EntreesSorties.afficherMessage("Aucun ouvrage n'est associe a ce numero ISBN.");
         }
     }
-    
-    
-    
+   
+   
+   
     private Ouvrage getOuvrage(Integer ISBN){
         return dicoOuvrage.get(ISBN);
     }
-    
+   
     private void lierOuvrageBibliotheque(Ouvrage o,int ISBN){
         dicoOuvrage.put(ISBN, o);
     }
-    
-    
-  
+   
+   
+   
+        // -----------------------------------------------
+        //                     EXEMPLAIRE
+        // ----------------------------------------------- 
+   
+   
+    public void nouvelExemplaire(){
+        int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
+        GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
+        Boolean empruntable = EntreesSorties.lireBool("Empruntable ? t si oui, f si non : ");
+     
+        EntreesSorties.afficherMessage("Fin de saisie");
+       
+        Ouvrage ouvrage =getOuvrage(ISBN);
+ 
+        ouvrage.nouvelExemplaire(dateParution, empruntable);
+       
+        EntreesSorties.afficherMessage("Exemplaire créé !");
+    }
+   
+   
+   
+    public void consulterExemplaireOuvrage(){
+       
+    }
+ 
 }
