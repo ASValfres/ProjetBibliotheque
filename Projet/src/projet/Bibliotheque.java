@@ -18,7 +18,7 @@ public class Bibliotheque implements Serializable {
     //Attributs
     // -----------------------------------------------
     private HashMap<Integer, Lecteur> dicoLecteur;
-    private HashMap<Integer, Lecteur> dicoOuvrage;
+    private HashMap<Integer, Ouvrage> dicoOuvrage;
 
     /*
 		 * Le dictionnaire de lecteur permet à bibliotheque de 
