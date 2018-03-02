@@ -146,40 +146,46 @@ public class Bibliotheque implements Serializable {
            // ----------------------------------------------- 
    
     public void nouvelOuvrage(){
-        int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
-        String titre = EntreesSorties.lireChaine("Entrez le titre : ");
-        String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
-        GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
-        String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
-        String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
-        
-        
-        EntreesSorties.afficherMessage("Fin de saisie");
-        
-        Public publif;
-  
-        switch(publicConcerné.toUpperCase()){
-            case "ENF":
-                publif=Public.enfant;
-                break;
-            case "ADU":
-                publif=Public.adulte;
-                break;
-            case "ADO":
-                publif=Public.adulte;
-                break;
-            default:
-                publif=Public.adulte;
-                break;
+        Integer ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
+        if(this.getOuvrage(ISBN)!=null){
+            EntreesSorties.afficherMessage("Cet Ouvrage existe déja : ");
+            this.getOuvrage(ISBN).afficherInfos();
         }
+        else{
+            String titre = EntreesSorties.lireChaine("Entrez le titre : ");
+            String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
+            GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
+            String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
+            String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
+        
+        
+            EntreesSorties.afficherMessage("Fin de saisie");
+        
+            Public publif;
+  
+            switch(publicConcerné.toUpperCase()){
+                case "ENF":
+                    publif=Public.enfant;
+                    break;
+                case "ADU":
+                    publif=Public.adulte;
+                    break;
+                case "ADO":
+                    publif=Public.adulte;
+                    break;
+                default:
+                    publif=Public.adulte;
+                    break;
+            }
                
  
-        Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
+            Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
         
-        lierOuvrageBibliotheque(O, ISBN);
+            lierOuvrageBibliotheque(O, ISBN);
+        }
     }
    
-    //int ISBN, String titre, String nomEditeur, Date dateParution, String nomAuteur, Public publif
+   
    
    
     public void consulterOuvrage(){
@@ -199,7 +205,7 @@ public class Bibliotheque implements Serializable {
         return dicoOuvrage.get(ISBN);
     }
    
-    private void lierOuvrageBibliotheque(Ouvrage o,int ISBN){
+    private void lierOuvrageBibliotheque(Ouvrage o,Integer ISBN){
         this.dicoOuvrage.put(ISBN, o);
     }
    
