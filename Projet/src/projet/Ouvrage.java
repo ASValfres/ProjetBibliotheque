@@ -53,7 +53,7 @@ public class Ouvrage implements Serializable {
         }
     }
     public void afficherInfos(){
-        System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN + "\n écrit par :" + nomAuteur + "\n Edité par : "+ nomEditeur + "\n Paru le : "+ dateParution+ "\n Destiné à un public : "+publif);
+        System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN + "\n écrit par :" + nomAuteur + "\n Edité par : "+ nomEditeur + "\n Paru le : "+ EntreesSorties.ecrireDate(dateParution)+ "\n Destiné à un public : "+publif);
     }
     
     public void lierExemplaireOuvrage(Exemplaire e){
