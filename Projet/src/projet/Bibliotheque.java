@@ -30,6 +30,7 @@ public class Bibliotheque implements Serializable {
     public Bibliotheque() {
         this.setLecteurs(new HashMap<Integer, Lecteur>());
         this.dernierLecteur=0;
+        this.setOuvrages(new HashMap<Integer,Ouvrage>());
 
     }
 
@@ -152,7 +153,9 @@ public class Bibliotheque implements Serializable {
         String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
         String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
         
+        
         EntreesSorties.afficherMessage("Fin de saisie");
+        
         Public publif;
   
         switch(publicConcerné.toUpperCase()){
@@ -167,12 +170,13 @@ public class Bibliotheque implements Serializable {
                 break;
             default:
                 publif=Public.adulte;
+                break;
         }
                
-       
-       
+ 
         Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
-        lierOuvrageBibliotheque(O, dernierLecteur);
+        
+        lierOuvrageBibliotheque(O, ISBN);
     }
    
     //int ISBN, String titre, String nomEditeur, Date dateParution, String nomAuteur, Public publif
@@ -196,9 +200,12 @@ public class Bibliotheque implements Serializable {
     }
    
     private void lierOuvrageBibliotheque(Ouvrage o,int ISBN){
-        dicoOuvrage.put(ISBN, o);
+        this.dicoOuvrage.put(ISBN, o);
     }
    
+    private void setOuvrages(HashMap<Integer, Ouvrage> dicoOuvrage) {
+        this.dicoOuvrage = dicoOuvrage;
+    }
    
    
         // -----------------------------------------------
