@@ -184,7 +184,7 @@ public class EntreesSorties {
         }
     } // Fin de lireFlottant
     
-    public static boolean lireBool(  String libelle){
+    public static boolean lireBool(String libelle){
 
       
         if (libelle == "t"){
