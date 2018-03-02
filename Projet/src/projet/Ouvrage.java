@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package projet;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,9 +13,9 @@ import java.util.GregorianCalendar;
  * @author valfres
  */
 
-public class Ouvrage {
+public class Ouvrage implements Serializable {
     
-    private static int dernierExemplaire;
+    private int dernierExemplaire;
     private ArrayList<Exemplaire> exemplaires;
     private int ISBN;
     private String titre;
@@ -24,7 +25,8 @@ public class Ouvrage {
     private String nomAuteur;
     
     public Ouvrage(int ISBN, String titre, String nomEditeur, GregorianCalendar dateParution, String nomAuteur, Public publif){
-
+        
+        this.dernierExemplaire = 0;
         this.ISBN = ISBN;
         this.titre = titre;
         this.nomEditeur = nomEditeur;
