@@ -5,6 +5,7 @@
  */
 package projet;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -13,7 +14,7 @@ import java.util.GregorianCalendar;
  *
  * @author valfres
  */
-public class Exemplaire {
+public class Exemplaire implements Serializable {
     private Boolean empruntable;
     private int numeroexemplaire;
     private GregorianCalendar datereception;
