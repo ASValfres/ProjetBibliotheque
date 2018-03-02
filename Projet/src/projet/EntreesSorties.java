@@ -184,18 +184,27 @@ public class EntreesSorties {
         }
     } // Fin de lireFlottant
     
-    public static boolean lireBool(String libelle){
-
-      
-        if (libelle == "t"){
-            return true;
-        } 
-        else if (libelle == "f"){
-            return false;
-        }
-        else System.out.println("ATTENTION, RISQUE D'ERREUR SUR LA VARIABLE EMPRUNTABLE. MIS SUR NON EMPRUNTABLE PAR DEFAUT !");
-            return false;
-    }
+   /* public static boolean lireBool(String libelle){
+        
+        String emprunt;
+        int sentinelle=1; //valeur sentinelle qui prend la valeur 1 lorsque l'utilisateur entre une commande correcte
+        do{
+            emprunt= String.valueOf(entree.readLine());
+            switch(emprunt.toUpperCase()){
+                case "O":
+                    return true;
+                    sentinelle=1;
+                    break;
+                case "N":
+                    return false;
+                    sentinelle=1;
+                    break;
+                default:
+                    System.out.println("Cette réponse n'est pas valide. Veuillez recommencer.");
+                    break;
+            }
+        }while(sentinelle==0);
+    } */
 
     /**
      * Affiche un libellé puis permet la saisie d'un réel. Si l'utilisateur
