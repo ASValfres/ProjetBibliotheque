@@ -11,7 +11,7 @@ public class Bibliotheque implements Serializable {
 
     private static final long serialVersionUID = 262L;
    
-    private static int dernierLecteur;
+    public int dernierLecteur;
    
 
     // -----------------------------------------------
@@ -29,6 +29,7 @@ public class Bibliotheque implements Serializable {
     // -----------------------------------------------
     public Bibliotheque() {
         this.setLecteurs(new HashMap<Integer, Lecteur>());
+        this.dernierLecteur=0;
 
     }
 
