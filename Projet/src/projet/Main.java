@@ -27,6 +27,7 @@ public class Main {
             ObjectInputStream in = new ObjectInputStream(fichier);
 
             bibliotheque = (Bibliotheque) in.readObject();
+           
 
             fichier.close();
             in.close();
