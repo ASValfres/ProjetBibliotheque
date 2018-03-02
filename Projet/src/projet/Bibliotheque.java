@@ -156,29 +156,38 @@ public class Bibliotheque implements Serializable {
             String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
             GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
             String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
-            String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
-        
-        
-            EntreesSorties.afficherMessage("Fin de saisie");
-        
+            
             Public publif;
-  
-            switch(publicConcerné.toUpperCase()){
+            String publicConcerné,test;
+            int i=0; //valeur sentinelle si prend la valeur de 1 signifie que l'entrée est bonne
+
+            do{
+                publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
+                test=publicConcerné;
+                System.out.println(test);
+                switch(test.toUpperCase()){
                 case "ENF":
                     publif=Public.enfant;
+                    i=1;
                     break;
                 case "ADU":
                     publif=Public.adulte;
+                    i=1;
                     break;
                 case "ADO":
                     publif=Public.adulte;
+                    i=1;
                     break;
                 default:
                     publif=Public.adulte;
+                    EntreesSorties.afficherMessage("Saisie incorrecte, veuillez recommencer.");
                     break;
-            }
-               
- 
+                }             
+            }while(i==0);
+            
+            //test.toUpperCase()!="ENF"&&test.toUpperCase()!="ADO"&&test.toUpperCase()!="ADU"
+            EntreesSorties.afficherMessage("Fin de saisie");
+
             Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
         
             lierOuvrageBibliotheque(O, ISBN);
@@ -221,16 +230,22 @@ public class Bibliotheque implements Serializable {
    
     public void nouvelExemplaire(){
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
-        GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
-        Boolean empruntable = EntreesSorties.lireBool("Empruntable ? t si oui, f si non : ");
+        Ouvrage O=getOuvrage(ISBN);
+        if(O==null){
+            EntreesSorties.afficherMessage("Aucun ouvrage n'a cet ISBN");
+        }
+        else{
+            GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de réception : ");
+            String emprunt=EntreesSorties.lireChaine("Empruntable ? t si oui, f si non : "); 
+            Boolean empruntable = EntreesSorties.lireBool(emprunt);
      
-        EntreesSorties.afficherMessage("Fin de saisie");
-       
-        Ouvrage ouvrage =getOuvrage(ISBN);
+            EntreesSorties.afficherMessage("Fin de saisie");
  
-        ouvrage.nouvelExemplaire(dateParution, empruntable);
+            O.nouvelExemplaire(dateReception, empruntable);
        
-        EntreesSorties.afficherMessage("Exemplaire créé !");
+            EntreesSorties.afficherMessage("Exemplaire créé !");
+        }
+        
     }
    
    
