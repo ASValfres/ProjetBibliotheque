@@ -49,7 +49,7 @@ public class Ouvrage implements Serializable {
     }
     public void afficherExemplaire(){
         for (int i=0;i<this.getExemplaire().size();i++){
-            exemplaires.get(i).afficherExemplaire();
+            exemplaires.get(i).afficherExemplaire(); 
         }
     }
     public void afficherInfos(){
@@ -58,20 +58,19 @@ public class Ouvrage implements Serializable {
     
     public void lierExemplaireOuvrage(Exemplaire e){
         this.exemplaires.add(e);
+                
     }
     
     public void afficherReduit(){
         System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN );
     }
     
-    public void nouvelExemplaire(GregorianCalendar dateReception, boolean empruntable){
-
-        
+    public void nouvelExemplaire(GregorianCalendar dateReception, Boolean empruntable){
+  
         this.incrementationNbEx();
         
         Exemplaire e = new Exemplaire(this, empruntable, dateReception, dernierExemplaire);
         this.lierExemplaireOuvrage(e);
-        e.lierOuvrageExemplaire(this);
     }
 }
                        
