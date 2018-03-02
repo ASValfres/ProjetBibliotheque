@@ -158,14 +158,12 @@ public class Bibliotheque implements Serializable {
             String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
             
             Public publif;
-            String publicConcerné,test;
+            String publicConcerné;
             int i=0; //valeur sentinelle si prend la valeur de 1 signifie que l'entrée est bonne
 
             do{
                 publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
-                test=publicConcerné;
-                System.out.println(test);
-                switch(test.toUpperCase()){
+                switch(publicConcerné.toUpperCase()){
                 case "ENF":
                     publif=Public.enfant;
                     i=1;
@@ -184,8 +182,7 @@ public class Bibliotheque implements Serializable {
                     break;
                 }             
             }while(i==0);
-            
-            //test.toUpperCase()!="ENF"&&test.toUpperCase()!="ADO"&&test.toUpperCase()!="ADU"
+   
             EntreesSorties.afficherMessage("Fin de saisie");
 
             Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
@@ -236,14 +233,35 @@ public class Bibliotheque implements Serializable {
         }
         else{
             GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de réception : ");
-            String emprunt=EntreesSorties.lireChaine("Empruntable ? t si oui, f si non : "); 
-            Boolean empruntable = EntreesSorties.lireBool(emprunt);
+            Boolean empruntable;
+            
+            int i=0; //valeur sentinelle si prend la valeur de 1 signifie que l'entrée est bonne
+
+            do{
+                String emprunt=EntreesSorties.lireChaine("Empruntable ? O si oui, N si non : "); 
+             
+                switch(emprunt.toUpperCase()){
+                case "O":
+                    empruntable=true;
+                    i=1;
+                    break;
+                case "N":
+                    empruntable=false;
+                    i=1;
+                    break;
+                default:
+                    empruntable=false;
+                    EntreesSorties.afficherMessage("Saisie incorrecte, veuillez recommencer.");
+                    break;
+                }             
+            }while(i==0);
+            
      
             EntreesSorties.afficherMessage("Fin de saisie");
  
             O.nouvelExemplaire(dateReception, empruntable);
        
-            EntreesSorties.afficherMessage("Exemplaire créé !");
+            
         }
         
     }
