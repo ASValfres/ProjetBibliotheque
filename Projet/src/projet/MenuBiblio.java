@@ -6,7 +6,7 @@ public class MenuBiblio {
     private Bibliotheque bibliotheque;
 
     public MenuBiblio(Bibliotheque bibliotheque) {
-        bibliotheque = bibliotheque;
+        this.bibliotheque = bibliotheque;
     }
 
     /*
