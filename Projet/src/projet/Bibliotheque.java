@@ -222,7 +222,10 @@ public class Bibliotheque implements Serializable {
    
    
     public void consulterExemplaireOuvrage(){
-       
+        int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN de l'ouvrage dont vous voulez les exemplaires : ");
+        Ouvrage ouvrage=getOuvrage(ISBN);
+        ouvrage.afficherReduit();
+        ouvrage.afficherExemplaire();
     }
  
 }
