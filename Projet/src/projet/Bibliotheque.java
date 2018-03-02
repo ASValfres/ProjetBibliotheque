@@ -74,6 +74,7 @@ public class Bibliotheque implements Serializable {
             } while ((age <= 3) | (age >= 110));
             String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
             String tel = EntreesSorties.lireChaine("Entrez le numero de telephone :");
+            EntreesSorties.afficherMessage("Le numéro du nouveau lecteur est "+ this.dernierLecteur);
             EntreesSorties.afficherMessage("Fin de saisie");
 
             Lecteur L = new Lecteur(nom, prenom, dernierLecteur, dateNaiss, adresse, tel);
@@ -107,7 +108,7 @@ public class Bibliotheque implements Serializable {
     // Setters
     // -----------------------------------------------
     private void setLecteurs(HashMap<Integer, Lecteur> dicoLecteur) {
-        dicoLecteur = dicoLecteur;
+        this.dicoLecteur = dicoLecteur;
     }
 
     // -----------------------------------------------
@@ -125,7 +126,7 @@ public class Bibliotheque implements Serializable {
   * La méthode lierLecteurBibliotheque permet d'ajouter un lecteur a la base de donnée de bibliotheque.
      */
     private void lierLecteurBibliotheque(Lecteur L, Integer numLecteur) {
-        dicoLecteur.put(numLecteur, L);
+        this.dicoLecteur.put(numLecteur, L);
     }
 
     /*
@@ -147,10 +148,9 @@ public class Bibliotheque implements Serializable {
         String titre = EntreesSorties.lireChaine("Entrez le titre : ");
         String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
         GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
-
         String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
         String publicConcerné = EntreesSorties.lireChaine("Entrez le public concerné (ENF pour enfant, ADO pour adolescent et ADU pour adulte) :");
-       
+        
         EntreesSorties.afficherMessage("Fin de saisie");
         Public publif;
   
