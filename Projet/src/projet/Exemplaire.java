@@ -25,8 +25,8 @@ public class Exemplaire implements Serializable {
         this.numeroexemplaire=numeroExemplaire;
         this.datereception=dateReception;
         this.ouvrage=ouvrage;
-        ouvrage.incrementationNbEx();
-        ouvrage.lierExemplaireOuvrage(this);
+        this.lierOuvrageExemplaire(ouvrage);
+        EntreesSorties.afficherMessage("Exemplaire "+this.numeroexemplaire+" créé !");
     }
     
     
@@ -44,7 +44,7 @@ public class Exemplaire implements Serializable {
             else{
                 System.out.println("Non empruntable");
             }
-            System.out.println("Date reception : "+this.datereception);
+            System.out.println("Date reception : "+EntreesSorties.ecrireDate(datereception));
         
             
     }
