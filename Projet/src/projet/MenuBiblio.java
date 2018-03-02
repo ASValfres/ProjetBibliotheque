@@ -111,7 +111,7 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage(" ========================================================");
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Nouvel exemplaire : 1                                  |");
-            EntreesSorties.afficherMessage("| Consulter exemplaire : 2                               |");
+            EntreesSorties.afficherMessage("| Consulter exemplaires d'un ouvrage : 2                 |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuEx = EntreesSorties.lireEntier();
