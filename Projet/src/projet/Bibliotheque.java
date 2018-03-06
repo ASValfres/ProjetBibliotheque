@@ -165,7 +165,7 @@ public class Bibliotheque implements Serializable {
                         i = 1;
                         break;
                     case "ADO":
-                        publif = Public.adulte;
+                        publif = Public.adolescent;
                         i = 1;
                         break;
                     default:
