@@ -175,12 +175,12 @@ public class Bibliotheque implements Serializable {
                 }
             } while (i == 0);
 
-            EntreesSorties.afficherMessage("Fin de saisie");
+            
 
             Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
 
             lierOuvrageBibliotheque(O, ISBN);
-
+            EntreesSorties.afficherMessage("Saisie du premier exemplaire.");
             this.nouvelExemplaire(O);
 
         }
