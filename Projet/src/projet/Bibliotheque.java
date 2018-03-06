@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import static projet.EntreesSorties.ecrireDate;
+
 
 // Classe de gestion de la Bibliotheque
 public class Bibliotheque implements Serializable {
@@ -33,7 +36,7 @@ public class Bibliotheque implements Serializable {
 
     }
 
-             // -----------------------------------------------
+    // -----------------------------------------------
     //                      Lecteur
     // ----------------------------------------------- 
     // -----------------------------------------------
@@ -135,7 +138,7 @@ public class Bibliotheque implements Serializable {
         return dicoLecteur.values().iterator();
     }
 
-           // -----------------------------------------------
+    // -----------------------------------------------
     //                     Ouvrage
     // ----------------------------------------------- 
     public void nouvelOuvrage() {
@@ -147,6 +150,13 @@ public class Bibliotheque implements Serializable {
             String titre = EntreesSorties.lireChaine("Entrez le titre : ");
             String nomEditeur = EntreesSorties.lireChaine("Entrez le nom de l'éditeur : ");
             GregorianCalendar dateParution = EntreesSorties.lireDate("Entrez la date de parution : ");
+            
+            GregorianCalendar now = new GregorianCalendar(); 
+            if (dateParution.compareTo(now)>0) {
+                do {
+                    dateParution = EntreesSorties.lireDate("La date de parution est incorrecte (postérieure à aujourd'hui), veuillez entrer la bonne date de parution :");
+                } while (dateParution.compareTo(now)>0);
+            }
             String nomAuteur = EntreesSorties.lireChaine("Entrez le nom de l'auteur : ");
 
             Public publif;
@@ -174,8 +184,6 @@ public class Bibliotheque implements Serializable {
                         break;
                 }
             } while (i == 0);
-
-            
 
             Ouvrage O = new Ouvrage(ISBN, titre, nomEditeur, dateParution, nomAuteur, publif);
 
@@ -208,20 +216,23 @@ public class Bibliotheque implements Serializable {
     private void setOuvrages(HashMap<Integer, Ouvrage> dicoOuvrage) {
         this.dicoOuvrage = dicoOuvrage;
     }
-    
-    
-    
 
         // -----------------------------------------------
-        //                     EXEMPLAIRE
-        // ----------------------------------------------- 
+    //                     EXEMPLAIRE
+    // ----------------------------------------------- 
     public void nouvelExemplaire() {
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         Ouvrage O = getOuvrage(ISBN);
         if (O == null) {
             EntreesSorties.afficherMessage("Aucun ouvrage n'a cet ISBN");
         } else {
-            GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de réception : ");
+            GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de réception bloup: ");
+            if (comparerDateRSupDateP(dateReception, O) != true) {
+                do {
+                    dateReception = EntreesSorties.lireDate("Veuillez entrer la bonne date de réception :");
+                } while (comparerDateRSupDateP(dateReception, O) != true);
+            }
+
             Boolean empruntable;
 
             int i = 0; //valeur sentinelle si prend la valeur de 1 signifie que l'entrée est bonne
@@ -255,6 +266,11 @@ public class Bibliotheque implements Serializable {
 
     public void nouvelExemplaire(Ouvrage ouvrage) {
         GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de réception : ");
+        if (comparerDateRSupDateP(dateReception, ouvrage) != true) {
+                do {
+                    dateReception = EntreesSorties.lireDate("Veuillez entrer la bonne date de réception :");
+                } while (comparerDateRSupDateP(dateReception, ouvrage) != true);
+            }
         Boolean empruntable;
 
         int i = 0; //valeur sentinelle si prend la valeur de 1 signifie que l'entrée est bonne
@@ -284,13 +300,27 @@ public class Bibliotheque implements Serializable {
 
     }
 
-
-
-public void consulterExemplaireOuvrage(){
+    public void consulterExemplaireOuvrage() {
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN de l'ouvrage dont vous voulez les exemplaires : ");
-        Ouvrage ouvrage=getOuvrage(ISBN);
+        Ouvrage ouvrage = getOuvrage(ISBN);
         ouvrage.afficherReduit();
         ouvrage.afficherExemplaire();
     }
- 
+
+    public Boolean comparerDateRSupDateP(GregorianCalendar dateReception, Ouvrage o) {
+        GregorianCalendar parution = o.getDateParution();
+        GregorianCalendar now=new GregorianCalendar();
+        if (parution.compareTo(dateReception) <= 0 && dateReception.compareTo(now)<0) {
+            return true;
+        } 
+        else if(dateReception.compareTo(now)>=0){
+            System.out.println("La date de réception est incorrecte (dans le futur).");
+            return false;
+        }
+        else{
+           System.out.println("La date de réception est incorrecte (antérieure à la date de parution : "+ecrireDate(parution)+").");
+           return false;
+        }
+    }
+
 }
