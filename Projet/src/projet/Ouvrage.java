@@ -44,6 +44,11 @@ public class Ouvrage implements Serializable {
        return this.publif;
     }
     
+    
+   public GregorianCalendar getDateParution(){
+       return this.dateParution;
+   }
+    
     public void incrementationNbEx(){
         dernierExemplaire += 1;
     }
