@@ -58,6 +58,7 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Nouveau Lecteur : 1                                    |");
             EntreesSorties.afficherMessage("| Consulter Lecteur : 2                                  |");
+            EntreesSorties.afficherMessage("| Consulter Emprunts Lecteur : 3                         |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuLect = EntreesSorties.lireEntier();
@@ -69,6 +70,10 @@ public class MenuBiblio {
                 }
                 case 2: {
                     bibliotheque.consulterLecteur();
+                    break;
+                }
+                case 3: {
+                    bibliotheque.consulterEmpruntsLecteur();
                     break;
                 }
                 default: {
