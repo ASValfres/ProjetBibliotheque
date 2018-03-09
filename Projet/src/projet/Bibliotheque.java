@@ -76,6 +76,9 @@ public class Bibliotheque implements Serializable {
         } while ((age <= 3) | (age >= 110));
         String adresse = EntreesSorties.lireChaine("Entrez l'adresse :");
         String tel = EntreesSorties.lireChaine("Entrez le numero de telephone :");
+        while(tel.length()!=10){
+            tel = EntreesSorties.lireChaine("Le numero de telephone est faux, veuillez recommencer:");
+        }
         EntreesSorties.afficherMessage("Le numéro du nouveau lecteur est " + this.dernierLecteur);
         EntreesSorties.afficherMessage("Fin de saisie");
 
