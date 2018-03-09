@@ -53,4 +53,15 @@ public class Exemplaire implements Serializable {
         this.ouvrage=o;
     }
     
+    private Ouvrage getOuvrage(){
+        return this.ouvrage;
+    }
+    
+    public void consulterEmpruntsLecteur(){
+        this.getOuvrage().afficherReduit();
+        
+    }
+    public void afficherInfos(){
+        EntreesSorties.afficherMessage("N° Exemplaire : " + this.numeroexemplaire+"." );
+    }
 }
