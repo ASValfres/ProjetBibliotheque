@@ -2,6 +2,7 @@
 package projet;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ public class Lecteur implements Serializable {
     private GregorianCalendar dateNaiss;
     private String adresse;
     private String tel;
+    private ArrayList<Emprunt> emprunts;
 
     // -----------------------------------------------
     //Constructeur
@@ -31,6 +33,7 @@ public class Lecteur implements Serializable {
         this.setDateNaiss(dateNaiss);
         this.setAdresse(adresse);
         this.setTel(tel);
+        this.emprunts=new ArrayList<>();
     }
 
 // -----------------------------------------------
@@ -125,5 +128,19 @@ public class Lecteur implements Serializable {
     private void setTel(String tel) {
         this.tel = tel;
     }
-
+    public void afficherInfos(){
+        System.out.println();
+        System.out.println();
+        EntreesSorties.afficherMessage("Numero lecteur : " + this.getNumLecteur() +"\n Nom et prenom du lecteur: " + this.getNom() + " " + this.getPrenom() + " a emprunté :");
+    }
+    public void consulterEmpruntsLecteur(){
+        for (Emprunt  m : this.getEmprunts()){
+             m.consulterEmpruntsLecteur();
+        }
+       
+    }
+    
+    private ArrayList<Emprunt> getEmprunts(){
+        return this.emprunts;
+    }
 }
