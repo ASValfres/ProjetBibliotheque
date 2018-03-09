@@ -140,7 +140,17 @@ public class Bibliotheque implements Serializable {
     private Iterator<Lecteur> lesLecteurs() {
         return dicoLecteur.values().iterator();
     }
-
+    public void consulterEmpruntsLecteur(){
+        int numeroLecteur = EntreesSorties.lireEntier("Entrez numéro de lecteur");
+        Lecteur l = getLecteur(numeroLecteur);
+        if(l != null){
+        l.afficherInfos();
+        l.consulterEmpruntsLecteur();
+        }
+        else{
+            EntreesSorties.afficherMessage("Ceci n'est pas un numéro de lecteur valide.");
+        }
+    }
     // -----------------------------------------------
     //                     Ouvrage
     // ----------------------------------------------- 
@@ -354,5 +364,5 @@ public class Bibliotheque implements Serializable {
             return false;
         }
     }
-
+    
 }
