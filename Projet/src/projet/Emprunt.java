@@ -22,4 +22,28 @@ public class Emprunt {
         this.exemplaire = exemplaire;
         this.dateEmprunt =  new GregorianCalendar();
     }
-}
+    
+    public void consulterEmpruntsLecteur(){
+        EntreesSorties.afficherMessage("Emprunté le :" +this.getDateEmprunt()+"\n");
+        this.getExemplaire().consulterEmpruntsLecteur();
+    }
+    
+    public Exemplaire getExemplaire(){
+        return this.exemplaire;
+    
+    }
+    public Lecteur getLecteur(){
+        return this.lecteur;
+    }
+    
+    public GregorianCalendar getDateEmprunt(){
+        return this.dateEmprunt;
+    }
+    
+    public GregorianCalendar getDateRelance(){
+        return this.dateRelance;
+    }      
+    
+  
+            
+ }
