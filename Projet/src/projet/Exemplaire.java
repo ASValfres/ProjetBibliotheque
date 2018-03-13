@@ -19,12 +19,14 @@ public class Exemplaire implements Serializable {
     private int numeroexemplaire;
     private GregorianCalendar datereception;
     private Ouvrage ouvrage;
+    private Emprunt emprunt;
     
     public Exemplaire(Ouvrage ouvrage, Boolean empruntable,GregorianCalendar dateReception, int numeroExemplaire){
         this.empruntable=empruntable;
         this.numeroexemplaire=numeroExemplaire;
         this.datereception=dateReception;
         this.ouvrage=ouvrage;
+        this.emprunt=null;
         this.lierOuvrageExemplaire(ouvrage);
         EntreesSorties.afficherMessage("Exemplaire "+this.numeroexemplaire+" créé !");
     }
@@ -68,6 +70,15 @@ public class Exemplaire implements Serializable {
     public int getNumeroExemplaire(){
         
      return this.numeroexemplaire;
+    }
+    public boolean exemplaireDispo(){
+        return this.empruntable;
+    }
+    public void lierEmpruntExemplaire(Emprunt m){
+        this.emprunt = m;
+    }
+    public Emprunt getEmprunt(){
+        return this.emprunt;
     }
        
 }
