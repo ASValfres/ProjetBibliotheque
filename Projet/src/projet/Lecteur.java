@@ -157,4 +157,24 @@ public class Lecteur implements Serializable {
     public void lierEmpruntLecteur(Emprunt m){
         this.emprunts.add(m);
     }
+    
+    
+    
+     //-----------------------------------------
+    //  LECTEUR      Rendre exemplaire Gaby voir lecteur
+    //-----------------------------------------
+    
+    
+    public void rendreExemplaire(Emprunt m){
+        supprimerEmprunt(m);    
+    }
+  
+    private void supprimerEmprunt(Emprunt m){
+        for(Emprunt e : this.emprunts){
+            if(e==m){
+                emprunts.remove(e);
+            }
+        }
+    }  
+
 }
