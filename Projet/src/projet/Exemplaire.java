@@ -67,7 +67,7 @@ public class Exemplaire implements Serializable {
     
     public int getNumeroExemplaire(){
         
-         return this.numeroexemplaire;
+     return this.numeroexemplaire;
     }
        
 }
