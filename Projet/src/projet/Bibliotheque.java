@@ -475,3 +475,10 @@ public class Bibliotheque implements Serializable {
 
 
 }
+
+//empecher d'emprunter 2 fois le même livre (et plusieurs personnes le même)
+//revoir affichage consulter emprunts
+//revoir quand on en emprunte 6 ça dit "exemplaire créé
+
+
+//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas /
