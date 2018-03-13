@@ -80,5 +80,25 @@ public class Exemplaire implements Serializable {
     public Emprunt getEmprunt(){
         return this.emprunt;
     }
+    
+    //-----------------------------------------
+    //   EXEMPLAIRE     Rendre exemplaire Gaby voir Emprunt
+    //-----------------------------------------
+    
+    
+    public Emprunt rendreExemplaire(){
+        Emprunt m= this.getEmprunt();  
+        if(m!=null){    
+            m.rendreExemplaire();
+            supprimerEmprunt();
+        }       
+        return m; 
+    }
+  
+    
+    private void supprimerEmprunt(){
+        this.emprunt=null;
+    }
+
        
 }
