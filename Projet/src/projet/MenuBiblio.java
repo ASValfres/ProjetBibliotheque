@@ -22,6 +22,7 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Menu Lecteur : 1                                       |");
             EntreesSorties.afficherMessage("| Menu Ouvrage : 2                                       |");
             EntreesSorties.afficherMessage("| Menu Exemplaire : 3                                    |");
+            EntreesSorties.afficherMessage("| Menu Emprunt : 4                                       |");
             EntreesSorties.afficherMessage("| Quitter : 0                                            |");
             EntreesSorties.afficherMessage(" ========================================================");
             menu = EntreesSorties.lireEntier();
@@ -37,6 +38,10 @@ public class MenuBiblio {
                 }
                 case 3: {
                     this.menuExemplaire();
+                    break;
+                }
+                case 4: {
+                    this.menuEmprunt();
                     break;
                 }
                 default: {
@@ -58,7 +63,6 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Nouveau Lecteur : 1                                    |");
             EntreesSorties.afficherMessage("| Consulter Lecteur : 2                                  |");
-            EntreesSorties.afficherMessage("| Consulter Emprunts Lecteur : 3                         |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuLect = EntreesSorties.lireEntier();
@@ -70,10 +74,6 @@ public class MenuBiblio {
                 }
                 case 2: {
                     bibliotheque.consulterLecteur();
-                    break;
-                }
-                case 3: {
-                    bibliotheque.consulterEmpruntsLecteur();
                     break;
                 }
                 default: {
@@ -138,4 +138,30 @@ public class MenuBiblio {
         } while (menuEx != 0);
     }
 
+     public void menuEmprunt() {
+        Integer menuEmp;
+        do {
+            EntreesSorties.afficherMessage(" ========================================================");
+            EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+            EntreesSorties.afficherMessage("| Nouvel Emprunt : 1                                     |");
+            EntreesSorties.afficherMessage("| Consulter Emprunts Lecteur : 2                         |");
+            EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
+            EntreesSorties.afficherMessage(" ========================================================");
+            menuEmp = EntreesSorties.lireEntier();
+
+            switch (menuEmp) {
+                case 1: {
+                    bibliotheque.emprunterExemplaire();
+                    break;
+                }
+                case 2: {
+                    bibliotheque.consulterEmpruntsLecteur();
+                    break;
+                }
+                default: {
+                    break;
+                }
+            }
+        } while (menuEmp != 0);
+    }
 }
