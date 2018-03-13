@@ -64,4 +64,10 @@ public class Exemplaire implements Serializable {
     public void afficherInfos(){
         EntreesSorties.afficherMessage("N° Exemplaire : " + this.numeroexemplaire+"." );
     }
+    
+    public int getNumeroExemplaire(){
+        
+         return this.numeroexemplaire;
+    }
+       
 }
