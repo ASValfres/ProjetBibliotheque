@@ -5,13 +5,15 @@
  */
 package projet;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  *
  * @author valfres
  */
-public class Emprunt {
+public class Emprunt implements Serializable {
     private Lecteur lecteur;
     private Exemplaire exemplaire;
     private GregorianCalendar dateEmprunt;
@@ -24,7 +26,7 @@ public class Emprunt {
     }
     
     public void consulterEmpruntsLecteur(){
-        EntreesSorties.afficherMessage("Emprunté le :" +this.getDateEmprunt()+"\n");
+        EntreesSorties.afficherMessage("Emprunté le :" + EntreesSorties.ecrireDate(getDateEmprunt())+"\n");
         this.getExemplaire().consulterEmpruntsLecteur();
     }
     
