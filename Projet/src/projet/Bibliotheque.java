@@ -57,7 +57,7 @@ public class Bibliotheque implements Serializable {
         String nom = EntreesSorties.lireChaine("Entrez le nom :");
         String prenom = EntreesSorties.lireChaine("Entrez le prenom :");
         Integer age;
-        
+
         GregorianCalendar dateNaiss, dateNaissComp;
         GregorianCalendar dateActuelle = new GregorianCalendar();
         do {
@@ -140,20 +140,73 @@ public class Bibliotheque implements Serializable {
     private Iterator<Lecteur> lesLecteurs() {
         return dicoLecteur.values().iterator();
     }
-    public void consulterEmpruntsLecteur(){
-        int numeroLecteur = EntreesSorties.lireEntier("Entrez numéro de lecteur");
+
+    // -----------------------------------------------
+    //                     Emprunt
+    // ----------------------------------------------- 
+    public void consulterEmpruntsLecteur() {
+        int numeroLecteur = EntreesSorties.lireEntier("Entrez numéro de lecteur : ");
         Lecteur l = getLecteur(numeroLecteur);
-        if(l != null){
+        while (l == null && numeroLecteur != 0) {
+            numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numéro de lecteur valide.\nEntrez numéro de lecteur, ou entrez 0 pour annuler : ");
+            l = getLecteur(numeroLecteur);
+        }
+
         l.afficherInfos();
         l.consulterEmpruntsLecteur();
-        }
-        else{
-            EntreesSorties.afficherMessage("Ceci n'est pas un numéro de lecteur valide.");
-        }
+
     }
+
+    public void emprunterExemplaire() {
+
+        int ISBN = EntreesSorties.lireEntier("Entrez un numéro ISBN :");
+        Ouvrage o = this.getOuvrage(ISBN);
+        while (o == null && ISBN != 0) {
+            ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
+            o = this.getOuvrage(ISBN);
+        }
+        if (o != null) {
+            int numeroExemplaire = EntreesSorties.lireEntier("Entrez un numéro d'exemplaire :");
+    //        Exemplaire e = o.getExemplairePrecis(numeroExemplaire);
+            //        while (e == null && numeroExemplaire != 0){
+            //           numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :" );
+            //           e = o.getExemplairePrecis(numeroExemplaire); 
+            //        }
+            //        
+            int numeroLecteur = EntreesSorties.lireEntier("Entrez un numéro de lecteur :");
+            Lecteur l = this.getLecteur(numeroLecteur);
+            while (l == null && numeroLecteur != 0) {
+                numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numero de lecteur valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
+                l = this.getLecteur(numeroLecteur);
+            }
+            if (l != null) {
+                if (!this.publicCompatible(l, o)) {
+                    EntreesSorties.afficherMessage("ce public n'est pas compatible.");
+                } else {
+                    if (l.lecteurDispo()){
+                        
+                    }
+                    else{
+                        EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    private boolean publicCompatible(Lecteur l, Ouvrage o) {
+        if (l.calculAge() >= o.getPublic().getAge()) {
+            return true;
+        }
+        return false;
+    }
+
     // -----------------------------------------------
     //                     Ouvrage
     // ----------------------------------------------- 
+
     public void nouvelOuvrage() {
         Integer ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         if (this.getOuvrage(ISBN) != null) {
@@ -206,8 +259,7 @@ public class Bibliotheque implements Serializable {
             EntreesSorties.afficherMessage("Saisie du premier exemplaire ? (O/N)");
             String reponse = EntreesSorties.lireChaine(" ---------------------------\n");
 
-
-            int fin=0;
+            int fin = 0;
             do {
                 switch (reponse.toUpperCase()) {
                     case "O":
@@ -221,17 +273,13 @@ public class Bibliotheque implements Serializable {
                         break;
                 }
             } while (fin == 0);
-            
-            if(fin==1){
+
+            if (fin == 1) {
                 this.nouvelExemplaire(O);
             }
 
         }
     }
-
-    
-
-    
 
     public void consulterOuvrage() {
         Integer ISBN = EntreesSorties.lireEntier("Entrez le numero ISBN de l'ouvrage que vous souhaitez consulter : \n");
@@ -255,10 +303,6 @@ public class Bibliotheque implements Serializable {
     private void setOuvrages(HashMap<Integer, Ouvrage> dicoOuvrage) {
         this.dicoOuvrage = dicoOuvrage;
     }
-    
-    
-    
-    
 
     // -----------------------------------------------
     //                     EXEMPLAIRE
@@ -308,7 +352,7 @@ public class Bibliotheque implements Serializable {
     }
 
     public void nouvelExemplaire(Ouvrage ouvrage) {
-        
+
         GregorianCalendar dateReception = EntreesSorties.lireDate("Entrez la date de réception : ");
         if (comparerDateRSupDateP(dateReception, ouvrage) != true) {
             do {
@@ -364,5 +408,5 @@ public class Bibliotheque implements Serializable {
             return false;
         }
     }
-    
+
 }
