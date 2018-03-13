@@ -36,8 +36,19 @@ public class Ouvrage implements Serializable {
         exemplaires = new ArrayList<>();
     }
     
-    public ArrayList getExemplaire(){
+    public ArrayList<Exemplaire> getExemplaire(){
         return this.exemplaires;
+    }
+    
+    public Exemplaire getExemplairePrecis(int numeroExemplaire){
+        Exemplaire exemplaireprecis = null;
+        for (Exemplaire e : this.getExemplaire()){
+            if (e.getNumeroExemplaire() == numeroExemplaire){
+                exemplaireprecis = e;
+            }
+               
+        }
+        return exemplaireprecis;
     }
     
     public Public getPublic(){
