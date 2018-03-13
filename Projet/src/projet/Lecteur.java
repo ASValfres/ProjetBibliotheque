@@ -131,16 +131,27 @@ public class Lecteur implements Serializable {
     public void afficherInfos(){
         System.out.println();
         System.out.println();
-        EntreesSorties.afficherMessage("Numero lecteur : " + this.getNumLecteur() +"\n Nom et prenom du lecteur: " + this.getNom() + " " + this.getPrenom() + " a emprunté :");
+        EntreesSorties.afficherMessage("Numero lecteur : " + this.getNumLecteur() +"\nNom et prenom du lecteur: " + this.getNom() + " " + this.getPrenom() + " a emprunté :");
     }
     public void consulterEmpruntsLecteur(){
-        for (Emprunt  m : this.getEmprunts()){
-             m.consulterEmpruntsLecteur();
+        if (this.getEmprunts().isEmpty()){
+            EntreesSorties.afficherMessage("Aucun emprunt pour ce lecteur.");
         }
+        else {
+            for (Emprunt  m : this.getEmprunts()){
+            
+             m.consulterEmpruntsLecteur();
+            }
        
+        }
     }
-    
     private ArrayList<Emprunt> getEmprunts(){
         return this.emprunts;
+    }
+    public  boolean lecteurDispo(){
+        if (this.getEmprunts().size() == 5){
+            return false;
+        }
+        return true;
     }
 }
