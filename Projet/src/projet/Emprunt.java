@@ -47,5 +47,26 @@ public class Emprunt implements Serializable {
     }      
     
   
+    //-----------------------------------------
+    //  EMPRUNT      Rendre exemplaire Gaby voir lecteur
+    //-----------------------------------------
+    
+    
+    public void rendreExemplaire(){
+        Lecteur l=getLecteur();
+        l.rendreExemplaire(this); 
+        supprimerLecteur();
+        supprimerExemplaire();
+        
+    }
+    
+    private void supprimerLecteur(){
+        this.lecteur=null;        
+    }
+    
+    private void supprimerExemplaire(){
+        this.exemplaire=null;        
+    }
+
             
  }
