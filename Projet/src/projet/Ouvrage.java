@@ -45,6 +45,7 @@ public class Ouvrage implements Serializable {
         for (Exemplaire e : this.getExemplaire()){
             if (e.getNumeroExemplaire() == numeroExemplaire){
                 exemplaireprecis = e;
+                break;
             }
                
         }
