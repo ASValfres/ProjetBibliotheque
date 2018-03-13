@@ -10,7 +10,17 @@ package projet;
  * @author valfres
  */
 public enum Public {
-    enfant,
-    adolescent,
-    adulte;
+    enfant(3),
+    adolescent(8),
+    adulte(18);
+    
+    private int age;
+    
+    Public(int age){
+        
+    }
+
+    public int getAge(){
+        return this.age;
+    }
 }
