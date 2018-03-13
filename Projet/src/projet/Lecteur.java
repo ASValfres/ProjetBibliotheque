@@ -154,4 +154,7 @@ public class Lecteur implements Serializable {
         }
         return true;
     }
+    public void lierEmpruntLecteur(Emprunt m){
+        this.emprunts.add(m);
+    }
 }
