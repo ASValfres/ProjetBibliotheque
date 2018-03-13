@@ -480,5 +480,6 @@ public class Bibliotheque implements Serializable {
 //revoir affichage consulter emprunts
 //revoir quand on en emprunte 6 ça dit "exemplaire créé
 
+//exemplaire : si son lien vers emprunt est null : non emprunté
 
-//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas /
+//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas / 
