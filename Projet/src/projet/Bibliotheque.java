@@ -6,7 +6,9 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import static projet.EntreesSorties.ecrireDate;
+
 
 // Classe de gestion de la Bibliotheque
 public class Bibliotheque implements Serializable {
@@ -20,6 +22,7 @@ public class Bibliotheque implements Serializable {
     // -----------------------------------------------
     private HashMap<Integer, Lecteur> dicoLecteur;
     private HashMap<Integer, Ouvrage> dicoOuvrage;
+    private ArrayList<Emprunt> listeEmprunts;
 
     /*
      * Le dictionnaire de lecteur permet à bibliotheque de
@@ -32,6 +35,7 @@ public class Bibliotheque implements Serializable {
         this.setLecteurs(new HashMap<Integer, Lecteur>());
         this.dernierLecteur = 0;
         this.setOuvrages(new HashMap<Integer, Ouvrage>());
+        this.listeEmprunts = new ArrayList<>();
 
     }
 
@@ -151,14 +155,18 @@ public class Bibliotheque implements Serializable {
             numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numéro de lecteur valide.\nEntrez numéro de lecteur, ou entrez 0 pour annuler : ");
             l = getLecteur(numeroLecteur);
         }
-
-        l.afficherInfos();
+        if (l != null){
+                    l.afficherInfos();
         l.consulterEmpruntsLecteur();
-
-    }
+        }
+   }
 
     public void emprunterExemplaire() {
-
+        boolean w = false;
+        Lecteur l = null;
+        Exemplaire e = null;
+        Emprunt m = null;
+        
         int ISBN = EntreesSorties.lireEntier("Entrez un numéro ISBN :");
         Ouvrage o = this.getOuvrage(ISBN);
         while (o == null && ISBN != 0) {
@@ -167,14 +175,9 @@ public class Bibliotheque implements Serializable {
         }
         if (o != null) {
             int numeroExemplaire = EntreesSorties.lireEntier("Entrez un numéro d'exemplaire :");
-    //        Exemplaire e = o.getExemplairePrecis(numeroExemplaire);
-            //        while (e == null && numeroExemplaire != 0){
-            //           numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :" );
-            //           e = o.getExemplairePrecis(numeroExemplaire); 
-            //        }
-            //        
+
             int numeroLecteur = EntreesSorties.lireEntier("Entrez un numéro de lecteur :");
-            Lecteur l = this.getLecteur(numeroLecteur);
+            l = this.getLecteur(numeroLecteur);
             while (l == null && numeroLecteur != 0) {
                 numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numero de lecteur valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
                 l = this.getLecteur(numeroLecteur);
@@ -183,17 +186,38 @@ public class Bibliotheque implements Serializable {
                 if (!this.publicCompatible(l, o)) {
                     EntreesSorties.afficherMessage("ce public n'est pas compatible.");
                 } else {
-                    if (l.lecteurDispo()){
-                        
-                    }
-                    else{
+                    if (!l.lecteurDispo()) {
                         EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
+                    } else {
+                        e = o.getExemplairePrecis(numeroExemplaire);
+                        while (e == null && numeroExemplaire != 0) {
+                            numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                            e = o.getExemplairePrecis(numeroExemplaire);
+                        }
+                        if(e != null){
+                            if (e.exemplaireDispo()){
+                               w = true; 
+                            }
+                            else { EntreesSorties.afficherMessage("Cet exemplaire n'est pas empruntable. ");}
+                        }
                     }
+                    
                 }
             }
 
         }
-
+        
+        if (w){
+            m = new Emprunt(l,e);
+            e.lierEmpruntExemplaire(m);
+            l.lierEmpruntLecteur(m);
+            this.lierBibliothequeEmprunt(m);
+        }
+        EntreesSorties.afficherMessage("Emprunt créé !");
+    }
+    
+    public void lierBibliothequeEmprunt( Emprunt m ){
+        this.listeEmprunts.add(m);
     }
 
     private boolean publicCompatible(Lecteur l, Ouvrage o) {
@@ -206,7 +230,6 @@ public class Bibliotheque implements Serializable {
     // -----------------------------------------------
     //                     Ouvrage
     // ----------------------------------------------- 
-
     public void nouvelOuvrage() {
         Integer ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         if (this.getOuvrage(ISBN) != null) {
