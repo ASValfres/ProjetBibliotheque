@@ -145,22 +145,27 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Nouvel Emprunt : 1                                     |");
             EntreesSorties.afficherMessage("| Consulter Emprunts Lecteur : 2                         |");
+            EntreesSorties.afficherMessage("| Rendre Exemplaire : 3                                  |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuEmp = EntreesSorties.lireEntier();
 
             switch (menuEmp) {
-                case 1: {
+                case 1: 
                     bibliotheque.emprunterExemplaire();
                     break;
-                }
-                case 2: {
+                
+                case 2: 
                     bibliotheque.consulterEmpruntsLecteur();
                     break;
-                }
-                default: {
+                
+                case 3: 
+                    bibliotheque.rendreExemplaire();
                     break;
-                }
+                
+                default: 
+                    break;
+                
             }
         } while (menuEmp != 0);
     }
