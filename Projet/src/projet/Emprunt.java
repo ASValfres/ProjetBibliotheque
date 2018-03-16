@@ -67,6 +67,9 @@ public class Emprunt implements Serializable {
     private void supprimerExemplaire(){
         this.exemplaire=null;        
     }
-
+    
+    public void setDateEmprunt(){
+        this.dateEmprunt = new GregorianCalendar();
+    }
             
  }
