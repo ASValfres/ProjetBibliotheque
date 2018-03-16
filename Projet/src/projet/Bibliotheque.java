@@ -190,7 +190,7 @@ public class Bibliotheque implements Serializable {
                     } else {
                         e = o.getExemplairePrecis(numeroExemplaire);
 
-                        while (e == null && numeroExemplaire != 0 && e.getEmprunt() != null) {
+                        while ((e == null && numeroExemplaire != 0) || (numeroExemplaire != 0 && e.getEmprunt() != null)) {
                             if (e.getEmprunt() != null) {
                                 numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
                             } else {
@@ -460,8 +460,13 @@ public class Bibliotheque implements Serializable {
 
             if (e != null) {
                 Emprunt m = e.rendreExemplaire();
+                
                 supprimerEmprunt(m);
+             
             }
+            
+                
+            
 
         }
     }
@@ -478,7 +483,7 @@ public class Bibliotheque implements Serializable {
 }
 
 
-//revoir affichage consulter emprunts
 
 
-//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas / 
+
+
