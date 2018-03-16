@@ -26,7 +26,7 @@ public class Emprunt implements Serializable {
     }
     
     public void consulterEmpruntsLecteur(){
-        EntreesSorties.afficherMessage("Emprunté le :" + EntreesSorties.ecrireDate(getDateEmprunt())+"\n");
+        EntreesSorties.afficherMessage("\nEmprunté le :" + EntreesSorties.ecrireDate(getDateEmprunt()));
         this.getExemplaire().consulterEmpruntsLecteur();
     }
     
