@@ -479,8 +479,17 @@ public class Bibliotheque implements Serializable {
             }
         }
     }
-
+     public void relancerLecteur(){
+          EntreesSorties.afficherMessage("Relance des lecteurs en retard en cours.");
+          for(Emprunt m : getEmprunts()){
+              m.relancerLecteur();
+          }
 }
+      private ArrayList<Emprunt> getEmprunts(){
+          return this.listeEmprunts;
+      }
+}
+  
 
 
 
