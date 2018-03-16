@@ -485,6 +485,7 @@ public class Bibliotheque implements Serializable {
      public void relancerLecteur(){
           EntreesSorties.afficherMessage("Relance des lecteurs en retard en cours.");
           for(Emprunt m : getEmprunts()){
+              
               m.relancerLecteur();
           }
            EntreesSorties.afficherMessage("Relance des lecteurs en retard terminée.");
