@@ -91,7 +91,11 @@ public class Exemplaire implements Serializable {
         if(m!=null){    
             m.rendreExemplaire();
             supprimerEmprunt();
-        }       
+            EntreesSorties.afficherMessage("Exemplaire rendu !");
+        }     
+        else {
+            EntreesSorties.afficherMessage("Cet exemplaire n'est pas emprunté.");
+        }
         return m; 
     }
   
