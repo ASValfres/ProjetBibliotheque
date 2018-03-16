@@ -172,15 +172,17 @@ public class Bibliotheque implements Serializable {
             ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
             o = this.getOuvrage(ISBN);
         }
+        
         if (o != null) {
-            int numeroExemplaire = EntreesSorties.lireEntier("Entrez un numéro d'exemplaire :");
-
             int numeroLecteur = EntreesSorties.lireEntier("Entrez un numéro de lecteur :");
             l = this.getLecteur(numeroLecteur);
             while (l == null && numeroLecteur != 0) {
                 numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numero de lecteur valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
                 l = this.getLecteur(numeroLecteur);
             }
+            
+            int numeroExemplaire = EntreesSorties.lireEntier("Entrez un numéro d'exemplaire :");
+
             if (l != null) {
                 if (!this.publicCompatible(l, o)) {
                     EntreesSorties.afficherMessage("ce public n'est pas compatible.");
@@ -190,14 +192,15 @@ public class Bibliotheque implements Serializable {
                     } else {
                         e = o.getExemplairePrecis(numeroExemplaire);
 
-                        while ((e == null && numeroExemplaire != 0) || (numeroExemplaire != 0 && e.getEmprunt() != null)) {
-                            if (e.getEmprunt() != null) {
-                                numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                            } else {
-                                numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                            }
+                        while (e == null && numeroExemplaire != 0) {
+                            numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
                             e = o.getExemplairePrecis(numeroExemplaire);
                         }
+                        
+                        while(numeroExemplaire != 0 && e.getEmprunt() != null){
+                            numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                        }
+                        
                         if (e != null) {
                             if (e.exemplaireDispo()) {
                                 w = true;
