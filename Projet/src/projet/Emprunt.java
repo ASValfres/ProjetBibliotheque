@@ -24,7 +24,7 @@ public class Emprunt implements Serializable {
     public Emprunt(Lecteur lecteur, Exemplaire exemplaire) {
         this.lecteur = lecteur;
         this.exemplaire = exemplaire;
-        this.dateEmprunt = new GregorianCalendar();
+        this.dateEmprunt = EntreesSorties.lireDate("Date d'Emprunt ?");
     }
 
     public void consulterEmpruntsLecteur() {
@@ -73,7 +73,9 @@ public class Emprunt implements Serializable {
     }
 
     public void relancerLecteur() {
+        EntreesSorties.afficherMessage("POUETPOUUUUUUUUUUUUEEEEET");
         if (this.retard()) {
+            EntreesSorties.afficherMessage("PLOUUUUUUUF");
             if (this.retardRelance()) {
                 this.getLecteur().afficherInfos();
                 this.getExemplaire().afficherInfos();
@@ -110,15 +112,11 @@ public class Emprunt implements Serializable {
     private boolean retard() {
         GregorianCalendar dateDuJour = new GregorianCalendar();
         GregorianCalendar test = this.getDateEmprunt();
-
-        test.add(Calendar.YEAR, -dateDuJour.get(Calendar.YEAR));
-        test.add(Calendar.MONTH, -dateDuJour.get(Calendar.MONTH));
-        test.add(Calendar.DATE, -dateDuJour.get(Calendar.DATE));
-        if (test.get(Calendar.DATE) > 15) {
-            return true;
-        } else {
-            return false;
-        }
+        test.add(Calendar.DATE, 15);
+//        test.add(Calendar.YEAR, -dateDuJour.get(Calendar.YEAR));
+//        test.add(Calendar.MONTH, -dateDuJour.get(Calendar.MONTH));
+//        test.add(Calendar.DATE, -dateDuJour.get(Calendar.DATE));
+        return (test.before(dateDuJour)) ;
     }
 
 }
