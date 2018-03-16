@@ -47,7 +47,9 @@ public class Exemplaire implements Serializable {
                 System.out.println("Non empruntable");
             }
             System.out.println("Date reception : "+EntreesSorties.ecrireDate(datereception));
-        
+            if (this.getEmprunt() != null){
+                EntreesSorties.afficherMessage("Emprunté le " + this.getEmprunt().getDateEmprunt() +".");
+            }
             
     }
     
@@ -55,7 +57,7 @@ public class Exemplaire implements Serializable {
         this.ouvrage=o;
     }
     
-    private Ouvrage getOuvrage(){
+    public Ouvrage getOuvrage(){
         return this.ouvrage;
     }
     
@@ -68,9 +70,9 @@ public class Exemplaire implements Serializable {
     }
     
     public int getNumeroExemplaire(){
-        
      return this.numeroexemplaire;
     }
+    
     public boolean exemplaireDispo(){
         return this.empruntable;
     }
