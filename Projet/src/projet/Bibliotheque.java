@@ -216,6 +216,7 @@ public class Bibliotheque implements Serializable {
             m = new Emprunt(l, e);
             e.lierEmpruntExemplaire(m);
             l.lierEmpruntLecteur(m);
+            m.setDateEmprunt();
             this.lierBibliothequeEmprunt(m);
             EntreesSorties.afficherMessage("Emprunt créé !");
         }
@@ -478,6 +479,6 @@ public class Bibliotheque implements Serializable {
 
 
 //revoir affichage consulter emprunts
-//exemplaire : si son lien vers emprunt est null : non emprunté
+
 
 //rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas / 
