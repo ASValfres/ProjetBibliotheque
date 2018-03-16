@@ -199,6 +199,7 @@ public class Bibliotheque implements Serializable {
                         
                         while(numeroExemplaire != 0 && e.getEmprunt() != null){
                             numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                            e = o.getExemplairePrecis(numeroExemplaire);
                         }
                         
                         if (e != null) {
@@ -501,3 +502,4 @@ public class Bibliotheque implements Serializable {
 
 
 
+//RELANCER LECTEUR, pourquoi ça affiche pas les infos exemplaires et tout et tout wesh, ca me saoule cousin
