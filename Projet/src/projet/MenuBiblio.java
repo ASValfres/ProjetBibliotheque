@@ -1,4 +1,3 @@
-
 package projet;
 
 public class MenuBiblio {
@@ -82,7 +81,7 @@ public class MenuBiblio {
             }
         } while (menuLect != 0);
     }
-    
+
     public void menuOuvrage() {
         Integer menuOuv;
         do {
@@ -109,7 +108,7 @@ public class MenuBiblio {
             }
         } while (menuOuv != 0);
     }
-    
+
     public void menuExemplaire() {
         Integer menuEx;
         do {
@@ -123,7 +122,7 @@ public class MenuBiblio {
 
             switch (menuEx) {
                 case 1: {
-                    
+
                     bibliotheque.nouvelExemplaire();
                     break;
                 }
@@ -138,7 +137,7 @@ public class MenuBiblio {
         } while (menuEx != 0);
     }
 
-     public void menuEmprunt() {
+    public void menuEmprunt() {
         Integer menuEmp;
         do {
             EntreesSorties.afficherMessage(" ========================================================");
@@ -146,26 +145,31 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Nouvel Emprunt : 1                                     |");
             EntreesSorties.afficherMessage("| Consulter Emprunts Lecteur : 2                         |");
             EntreesSorties.afficherMessage("| Rendre Exemplaire : 3                                  |");
+            EntreesSorties.afficherMessage("| Relancer lecteurs : 4                                  |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuEmp = EntreesSorties.lireEntier();
 
             switch (menuEmp) {
-                case 1: 
+                case 1:
                     bibliotheque.emprunterExemplaire();
                     break;
-                
-                case 2: 
+
+                case 2:
                     bibliotheque.consulterEmpruntsLecteur();
                     break;
-                
-                case 3: 
+
+                case 3:
                     bibliotheque.rendreExemplaire();
                     break;
-                
-                default: 
+
+                case 4:
+                    bibliotheque.relancerLecteur();
                     break;
-                
+
+                default:
+                    break;
+
             }
         } while (menuEmp != 0);
     }
