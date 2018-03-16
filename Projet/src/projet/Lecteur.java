@@ -170,11 +170,11 @@ public class Lecteur implements Serializable {
     }
   
     private void supprimerEmprunt(Emprunt m){
-        for(Emprunt e : this.emprunts){
-            if(e==m){
-                emprunts.remove(e);
-            }
+       // for(Emprunt e : this.emprunts){
+         //   if(e==m){
+                emprunts.remove(m);
+            //}
         }
-    }  
+    //}  
 
 }
