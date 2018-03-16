@@ -482,4 +482,4 @@ public class Bibliotheque implements Serializable {
 
 //exemplaire : si son lien vers emprunt est null : non emprunté
 
-//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas / 
+//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas /  grtfyer-uyhegv(r uy
