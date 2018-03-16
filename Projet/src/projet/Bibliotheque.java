@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import static projet.EntreesSorties.ecrireDate;
 
-
 // Classe de gestion de la Bibliotheque
 public class Bibliotheque implements Serializable {
 
@@ -155,18 +154,18 @@ public class Bibliotheque implements Serializable {
             numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numéro de lecteur valide.\nEntrez numéro de lecteur, ou entrez 0 pour annuler : ");
             l = getLecteur(numeroLecteur);
         }
-        if (l != null){
-                    l.afficherInfos();
-        l.consulterEmpruntsLecteur();
+        if (l != null) {
+            l.afficherInfos();
+            l.consulterEmpruntsLecteur();
         }
-   }
+    }
 
     public void emprunterExemplaire() {
         boolean w = false;
         Lecteur l = null;
         Exemplaire e = null;
         Emprunt m = null;
-        
+
         int ISBN = EntreesSorties.lireEntier("Entrez un numéro ISBN :");
         Ouvrage o = this.getOuvrage(ISBN);
         while (o == null && ISBN != 0) {
@@ -190,33 +189,40 @@ public class Bibliotheque implements Serializable {
                         EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
                     } else {
                         e = o.getExemplairePrecis(numeroExemplaire);
-                        while (e == null && numeroExemplaire != 0) {
-                            numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+
+                        while (e == null && numeroExemplaire != 0 && e.getEmprunt() != null) {
+                            if (e.getEmprunt() != null) {
+                                numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                            } else {
+                                numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                            }
                             e = o.getExemplairePrecis(numeroExemplaire);
                         }
-                        if(e != null){
-                            if (e.exemplaireDispo()){
-                               w = true; 
+                        if (e != null) {
+                            if (e.exemplaireDispo()) {
+                                w = true;
+                            } else {
+                                EntreesSorties.afficherMessage("Cet exemplaire n'est pas empruntable. ");
                             }
-                            else { EntreesSorties.afficherMessage("Cet exemplaire n'est pas empruntable. ");}
                         }
                     }
-                    
+
                 }
             }
 
         }
-        
-        if (w){
-            m = new Emprunt(l,e);
+
+        if (w) {
+            m = new Emprunt(l, e);
             e.lierEmpruntExemplaire(m);
             l.lierEmpruntLecteur(m);
             this.lierBibliothequeEmprunt(m);
+            EntreesSorties.afficherMessage("Emprunt créé !");
         }
-        EntreesSorties.afficherMessage("Emprunt créé !");
+
     }
-    
-    public void lierBibliothequeEmprunt( Emprunt m ){
+
+    public void lierBibliothequeEmprunt(Emprunt m) {
         this.listeEmprunts.add(m);
     }
 
@@ -431,55 +437,47 @@ public class Bibliotheque implements Serializable {
             return false;
         }
     }
-    
-    
-    
-    
+
     //------------------------------------
     //        BIBLIOTHEQUE     Rendre exemplaire  Gaby (voir exemplaire)
     //-------------------------------------
-    
-    public void rendreExemplaire(){
+    public void rendreExemplaire() {
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         Ouvrage o = getOuvrage(ISBN);
         while (o == null && ISBN != 0) {
             ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
             o = this.getOuvrage(ISBN);
         }
-        if(o!=null){
+        if (o != null) {
             int numeroExemplaire = EntreesSorties.lireEntier("Entrez le numéro d'exemplaire : ");
-            Exemplaire e=o.getExemplairePrecis(numeroExemplaire);
-            
+            Exemplaire e = o.getExemplairePrecis(numeroExemplaire);
+
             while (e == null && numeroExemplaire != 0) {
-            numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-            e=o.getExemplairePrecis(numeroExemplaire);
+                numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                e = o.getExemplairePrecis(numeroExemplaire);
             }
-            
-            if(e!=null){
-                Emprunt m=e.rendreExemplaire();
+
+            if (e != null) {
+                Emprunt m = e.rendreExemplaire();
                 supprimerEmprunt(m);
             }
-            
-            
+
         }
     }
-    
-    private void supprimerEmprunt(Emprunt m){ //super long car continue une fois trouvé
-        for(Emprunt e : listeEmprunts){
-            if(e==m){
+
+    private void supprimerEmprunt(Emprunt m) { //super long car continue une fois trouvé
+        for (Emprunt e : listeEmprunts) {
+            if (e == m) {
                 listeEmprunts.remove(e);
                 break;
             }
         }
     }
 
-
 }
 
-//empecher d'emprunter 2 fois le même livre (et plusieurs personnes le même)
-//revoir affichage consulter emprunts
-//revoir quand on en emprunte 6 ça dit "exemplaire créé
 
+//revoir affichage consulter emprunts
 //exemplaire : si son lien vers emprunt est null : non emprunté
 
-//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas /  grtfyer-uyhegv(r uy
+//rendre exemplaire : un exemplaire emprunté/ un non emprunté / un qui n'existe pas / 
