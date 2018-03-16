@@ -14,13 +14,13 @@ public enum Public {
     adolescent(8),
     adulte(18);
     
-    private int age;
+    private int age=18;
     
-    Public(int age){
-        
+    private Public(int age){
+        this.age=age;
     }
 
     public int getAge(){
-        return this.age;
+        return age;
     }
 }
