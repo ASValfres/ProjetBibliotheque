@@ -24,7 +24,9 @@ public class Emprunt implements Serializable {
     public Emprunt(Lecteur lecteur, Exemplaire exemplaire) {
         this.lecteur = lecteur;
         this.exemplaire = exemplaire;
+        //  this.dateEmprunt = new GregorianCalendar();
         this.dateEmprunt = EntreesSorties.lireDate("Date d'Emprunt ?");
+        this.dateRelance = null;
     }
 
     public void consulterEmpruntsLecteur() {
@@ -68,55 +70,54 @@ public class Emprunt implements Serializable {
         this.exemplaire = null;
     }
 
-    public void setDateEmprunt() {
-        this.dateEmprunt = new GregorianCalendar();
+    private void miseAJourDateRelance() {
+        this.setDateRelance(new GregorianCalendar());
+    }
+
+    private void setDateRelance(GregorianCalendar date) {
+        this.dateRelance = date;
     }
 
     public void relancerLecteur() {
-        EntreesSorties.afficherMessage("POUETPOUUUUUUUUUUUUEEEEET");
         if (this.retard()) {
-            EntreesSorties.afficherMessage("PLOUUUUUUUF");
             if (this.retardRelance()) {
                 this.getLecteur().afficherInfos();
                 this.getExemplaire().afficherInfos();
                 this.getExemplaire().getOuvrage().afficherReduit();
                 this.miseAJourDateRelance();
             }
+            EntreesSorties.afficherMessage("Lecteur relancé pour cet emprunt.\n\n");
         }
     }
 
-    private void miseAJourDateRelance(){
-        this.setDateRelance(new GregorianCalendar());
-    }
-    private void setDateRelance(GregorianCalendar date){
-        this.dateRelance = date;
-    }
     private boolean retardRelance() {
-        if (this.getDateRelance() == null) {
-            return false;
-        }
-        GregorianCalendar dateDuJour = new GregorianCalendar();
-        GregorianCalendar test = this.getDateRelance();
-
-        test.add(Calendar.YEAR, -dateDuJour.get(Calendar.YEAR));
-        test.add(Calendar.MONTH, -dateDuJour.get(Calendar.MONTH));
-        test.add(Calendar.DATE, -dateDuJour.get(Calendar.DATE));
-        if (test.get(Calendar.DATE) > 7) {
+        if (this.getDateRelance() == null) {   
             return true;
-        } else {
-            return false;
         }
-        
+        if (this.retard()) {
+            GregorianCalendar dateDuJour = new GregorianCalendar();
+            GregorianCalendar test = this.getDateRelance();
+            GregorianCalendar test2 = (GregorianCalendar) test.clone();
+          test2.add(Calendar.DATE, 7);
+            if (test2.before(dateDuJour) ) {               
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else return false;
     }
 
     private boolean retard() {
         GregorianCalendar dateDuJour = new GregorianCalendar();
         GregorianCalendar test = this.getDateEmprunt();
-        test.add(Calendar.DATE, 15);
+        GregorianCalendar test2 = (GregorianCalendar) test.clone();
+        test2.add(Calendar.DATE, 15);
+        // CFO  EntreesSorties.ecrireDateComplete(test2);
 //        test.add(Calendar.YEAR, -dateDuJour.get(Calendar.YEAR));
 //        test.add(Calendar.MONTH, -dateDuJour.get(Calendar.MONTH));
 //        test.add(Calendar.DATE, -dateDuJour.get(Calendar.DATE));
-        return (test.before(dateDuJour)) ;
+        return (test2.before(dateDuJour));
     }
 
 }
