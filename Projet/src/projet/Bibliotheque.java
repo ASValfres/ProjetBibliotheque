@@ -220,7 +220,6 @@ public class Bibliotheque implements Serializable {
             m = new Emprunt(l, e);
             e.lierEmpruntExemplaire(m);
             l.lierEmpruntLecteur(m);
-            m.setDateEmprunt();
             this.lierBibliothequeEmprunt(m);
             EntreesSorties.afficherMessage("Emprunt créé !");
         }
@@ -237,6 +236,55 @@ public class Bibliotheque implements Serializable {
         }
         return false;
     }
+    
+        public void rendreExemplaire() {
+        int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
+        Ouvrage o = getOuvrage(ISBN);
+        while (o == null && ISBN != 0) {
+            ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
+            o = this.getOuvrage(ISBN);
+        }
+        if (o != null) {
+            int numeroExemplaire = EntreesSorties.lireEntier("Entrez le numéro d'exemplaire : ");
+            Exemplaire e = o.getExemplairePrecis(numeroExemplaire);
+
+            while (e == null && numeroExemplaire != 0) {
+                numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                e = o.getExemplairePrecis(numeroExemplaire);
+            }
+
+            if (e != null) {
+                Emprunt m = e.rendreExemplaire();
+                
+                supprimerEmprunt(m);
+             
+            }
+            
+                
+            
+
+        }
+    }
+
+    private void supprimerEmprunt(Emprunt m) { //super long car continue une fois trouvé
+        for (Emprunt e : listeEmprunts) {
+            if (e == m) {
+                listeEmprunts.remove(e);
+                break;
+            }
+        }
+    }
+     public void relancerLecteur(){
+          EntreesSorties.afficherMessage("Relance des lecteurs en retard en cours.");
+          for(Emprunt m : getEmprunts()){
+              
+              m.relancerLecteur();
+          }
+           EntreesSorties.afficherMessage("Relance des lecteurs en retard terminée.");
+}
+      private ArrayList<Emprunt> getEmprunts(){
+          return this.listeEmprunts;
+      }
 
     // -----------------------------------------------
     //                     Ouvrage
@@ -446,54 +494,7 @@ public class Bibliotheque implements Serializable {
     //------------------------------------
     //        BIBLIOTHEQUE     Rendre exemplaire  Gaby (voir exemplaire)
     //-------------------------------------
-    public void rendreExemplaire() {
-        int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
-        Ouvrage o = getOuvrage(ISBN);
-        while (o == null && ISBN != 0) {
-            ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
-            o = this.getOuvrage(ISBN);
-        }
-        if (o != null) {
-            int numeroExemplaire = EntreesSorties.lireEntier("Entrez le numéro d'exemplaire : ");
-            Exemplaire e = o.getExemplairePrecis(numeroExemplaire);
 
-            while (e == null && numeroExemplaire != 0) {
-                numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                e = o.getExemplairePrecis(numeroExemplaire);
-            }
-
-            if (e != null) {
-                Emprunt m = e.rendreExemplaire();
-                
-                supprimerEmprunt(m);
-             
-            }
-            
-                
-            
-
-        }
-    }
-
-    private void supprimerEmprunt(Emprunt m) { //super long car continue une fois trouvé
-        for (Emprunt e : listeEmprunts) {
-            if (e == m) {
-                listeEmprunts.remove(e);
-                break;
-            }
-        }
-    }
-     public void relancerLecteur(){
-          EntreesSorties.afficherMessage("Relance des lecteurs en retard en cours.");
-          for(Emprunt m : getEmprunts()){
-              
-              m.relancerLecteur();
-          }
-           EntreesSorties.afficherMessage("Relance des lecteurs en retard terminée.");
-}
-      private ArrayList<Emprunt> getEmprunts(){
-          return this.listeEmprunts;
-      }
 }
   
 
