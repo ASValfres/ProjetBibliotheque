@@ -51,9 +51,7 @@ public class Emprunt implements Serializable {
         return this.dateRelance;
     }
 
-    //-----------------------------------------
-    //  EMPRUNT      Rendre exemplaire Gaby voir lecteur
-    //-----------------------------------------
+
     public void rendreExemplaire() {
         Lecteur l = getLecteur();
         l.rendreExemplaire(this);
