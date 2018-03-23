@@ -50,19 +50,19 @@ public class Lecteur implements Serializable {
         return prenom;
     }
 
-    public Integer getNumLecteur() {
+    private Integer getNumLecteur() {
         return numLecteur;
     }
 
-    public GregorianCalendar getDateNaiss() {
+    private GregorianCalendar getDateNaiss() {
         return dateNaiss;
     }
 
-    public String getAdresse() {
+    private String getAdresse() {
         return adresse;
     }
 
-    public String getTel() {
+    private String getTel() {
         return tel;
     }
     // -----------------------------------------------
@@ -158,11 +158,7 @@ public class Lecteur implements Serializable {
         this.emprunts.add(m);
     }
     
-    
-    
-     //-----------------------------------------
-    //  LECTEUR      Rendre exemplaire Gaby voir lecteur
-    //-----------------------------------------
+   
     
     
     public void rendreExemplaire(Emprunt m){
