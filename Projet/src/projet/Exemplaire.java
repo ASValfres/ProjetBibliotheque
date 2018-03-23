@@ -42,13 +42,15 @@ public class Exemplaire implements Serializable {
             System.out.println("\nNuméro exemplaire :"+this.numeroexemplaire);
             if(this.empruntable){
                 System.out.println("Empruntable");
+                
             }
             else{
                 System.out.println("Non empruntable");
             }
             System.out.println("Date reception : "+EntreesSorties.ecrireDate(datereception));
             if (this.getEmprunt() != null){
-                EntreesSorties.afficherMessage("Emprunté le " + this.getEmprunt().getDateEmprunt() +".");
+                EntreesSorties.afficherMessage("Emprunté le " + EntreesSorties.ecrireDate(this.getEmprunt().getDateEmprunt()) +".");
+                EntreesSorties.afficherMessage("Par "+ this.emprunt.getLecteur().getNom()+ " "+this.emprunt.getLecteur().getPrenom());
             }
             
     }
@@ -83,9 +85,7 @@ public class Exemplaire implements Serializable {
         return this.emprunt;
     }
     
-    //-----------------------------------------
-    //   EXEMPLAIRE     Rendre exemplaire Gaby voir Emprunt
-    //-----------------------------------------
+
     
     
     public Emprunt rendreExemplaire(){
@@ -106,5 +106,6 @@ public class Exemplaire implements Serializable {
         this.emprunt=null;
     }
 
+    
        
 }
