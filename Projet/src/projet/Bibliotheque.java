@@ -472,9 +472,17 @@ public class Bibliotheque implements Serializable {
 
     public void consulterExemplaireOuvrage() {
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN de l'ouvrage dont vous voulez les exemplaires : ");
+     
         Ouvrage ouvrage = getOuvrage(ISBN);
-        ouvrage.afficherReduit();
-        ouvrage.afficherExemplaire();
+        while (ouvrage == null && ISBN != 0) {
+            ISBN = EntreesSorties.lireEntier("Ceci n'est pas un ISBN valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
+            ouvrage = getOuvrage(ISBN);
+            if(ouvrage!=null){
+                ouvrage.afficherReduit();
+                ouvrage.afficherExemplaire();
+            }
+            }
+        
     }
 
     public Boolean comparerDateRSupDateP(GregorianCalendar dateReception, Ouvrage o) {
@@ -491,9 +499,6 @@ public class Bibliotheque implements Serializable {
         }
     }
 
-    //------------------------------------
-    //        BIBLIOTHEQUE     Rendre exemplaire  Gaby (voir exemplaire)
-    //-------------------------------------
 
 }
   
@@ -501,6 +506,3 @@ public class Bibliotheque implements Serializable {
 
 
 
-
-
-//RELANCER LECTEUR, pourquoi ça affiche pas les infos exemplaires et tout et tout wesh, ca me saoule cousin
