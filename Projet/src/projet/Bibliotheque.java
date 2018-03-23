@@ -189,20 +189,8 @@ public class Bibliotheque implements Serializable {
                 } else {
                     if (!l.lecteurDispo()) {
                         EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
-                    } else {
-                        e = o.getExemplairePrecis(numeroExemplaire);
-
-                        while (e == null && numeroExemplaire != 0) {
-                            numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                            e = o.getExemplairePrecis(numeroExemplaire);
-                        }
-                        
-                        while(numeroExemplaire != 0 && e.getEmprunt() != null){
-                            numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                            e = o.getExemplairePrecis(numeroExemplaire);
-                        }
-                        
-                        if (e != null) {
+                    } else {                 
+                        if (o.exemplaireDispo(numeroExemplaire)) {
                             if (e.exemplaireDispo()) {
                                 w = true;
                             } else {
@@ -494,7 +482,7 @@ public class Bibliotheque implements Serializable {
             System.out.println("La date de réception est incorrecte (dans le futur).");
             return false;
         } else {
-            System.out.println("La date de réception est incorrecte (antérieure à la date de parution : " + ecrireDate(parution) + ").");
+            System.out.println("La date de réception est incorrecte (antérieure à la date de parution : " + EntreesSorties.ecrireDate(parution) + ").");
             return false;
         }
     }
