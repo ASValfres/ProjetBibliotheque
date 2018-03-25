@@ -75,7 +75,7 @@ public class Ouvrage implements Serializable {
         System.out.println(" Titre : " + titre + "\n N° ISBN : " + ISBN + "\n écrit par :" + nomAuteur + "\n Edité par : " + nomEditeur + "\n Paru le : " + EntreesSorties.ecrireDate(dateParution) + "\n Destiné à un public : " + publif);
     }
 
-    public void lierExemplaireOuvrage(Exemplaire e) {
+    private void lierExemplaireOuvrage(Exemplaire e) {
         this.exemplaires.add(e);
 
     }
