@@ -163,49 +163,94 @@ public class Bibliotheque implements Serializable {
     public void emprunterExemplaire() {
         boolean w = false;
         Lecteur l = null;
+        Ouvrage o = null;
+        int ISBN = 0;
         Exemplaire e = null;
         Emprunt m;
+        boolean quit = false;
+        boolean a = false;
+        boolean b = false;
+        boolean c = false;
+        boolean d = false;
+        int numeroExemplaire = 0;
 
-        int ISBN = EntreesSorties.lireEntier("Entrez un numéro ISBN :");
-        Ouvrage o = this.getOuvrage(ISBN);
-        while (o == null && ISBN != 0) {
-            ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
-            o = this.getOuvrage(ISBN);
-        }
-        
-        if (o != null) {
-            int numeroLecteur = EntreesSorties.lireEntier("Entrez un numéro de lecteur :");
-            l = this.getLecteur(numeroLecteur);
-            while (l == null && numeroLecteur != 0) {
-                numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numero de lecteur valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
-                l = this.getLecteur(numeroLecteur);
-            }
-            
-            int numeroExemplaire = EntreesSorties.lireEntier("Entrez un numéro d'exemplaire :");
+        do {
 
-            if (l != null) {
-                if (!this.publicCompatible(l, o)) {
-                    EntreesSorties.afficherMessage("ce public n'est pas compatible.");
-                } else {
-                    if (!l.lecteurDispo()) {
-                        EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
-                    } else {                 
-                        if (o.exemplaireDispo(numeroExemplaire)) {
-                            e = o.getExemplairePrecis(numeroExemplaire);
-                            if (e.exemplaireDispo()) {
-                                w = true;
-                            } else {
-                                EntreesSorties.afficherMessage("Cet exemplaire n'est pas empruntable. ");
-                            }
-                        }
-                    }
+            if (!d && !a) {
+                ISBN = EntreesSorties.lireEntier("Entrez un numéro ISBN :");
+                o = this.getOuvrage(ISBN);
+                while (o == null && ISBN != 0) {
+                    ISBN = EntreesSorties.lireEntier("Ceci n'est pas un numéro ISBN présent dans la bibliothèque. \nEntrez un numéro ISBN, ou entrez 0 pour annuler :");
+                    o = this.getOuvrage(ISBN);
 
                 }
             }
 
-        }
+            if (ISBN == 0) {
+                quit = true;
+            } else {
+                a = true;
+            }
+            if (a && !b) {
+                int numeroLecteur = EntreesSorties.lireEntier("Entrez un numéro de lecteur :");
+                l = this.getLecteur(numeroLecteur);
+                while (l == null && numeroLecteur != 0) {
+                    numeroLecteur = EntreesSorties.lireEntier("Ceci n'est pas un numero de lecteur valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
+                    l = this.getLecteur(numeroLecteur);
 
-        if (w) {
+                }
+
+                if (numeroLecteur == 0) {
+                    quit = true;
+                } else {
+                    b = true;
+                }
+            }
+
+            if (b && !c) {
+                numeroExemplaire = EntreesSorties.lireEntier("Entrez un numéro d'exemplaire :");
+
+                if (!this.publicCompatible(l, o)) {
+                    EntreesSorties.afficherMessage("ce public n'est pas compatible.");
+                    quit = true;
+                } else {
+                    if (!l.lecteurDispo()) {
+                        EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
+                        quit = true;
+                    } else {
+                        c = true;
+
+                    }
+                }
+            }
+            if (c && !d) {
+                e = o.getExemplairePrecis(numeroExemplaire);
+                while (e == null && numeroExemplaire != 0) {
+
+                    numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+                    e = o.getExemplairePrecis(numeroExemplaire);
+                }
+                if (numeroExemplaire == 0) {
+                    quit = true;
+                } else {
+                    if (e.exemplaireDispo()) {
+                        if (o.exemplaireDispo(numeroExemplaire)) {
+                            d = true;
+                        } else {
+
+                            quit = true;
+                        }
+
+                    } else {
+
+                        EntreesSorties.afficherMessage("Cet exemplaire n'est pas empruntable. ");
+                    }
+                }
+
+            }
+
+        } while ((!a || !b || !c || !d) && !quit);
+        if (!quit) {
             m = new Emprunt(l, e);
             e.lierEmpruntExemplaire(m);
             l.lierEmpruntLecteur(m);
@@ -225,8 +270,8 @@ public class Bibliotheque implements Serializable {
         }
         return false;
     }
-    
-        public void rendreExemplaire() {
+
+    public void rendreExemplaire() {
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN : ");
         Ouvrage o = getOuvrage(ISBN);
         while (o == null && ISBN != 0) {
@@ -244,13 +289,10 @@ public class Bibliotheque implements Serializable {
 
             if (e != null) {
                 Emprunt m = e.rendreExemplaire();
-                
+
                 supprimerEmprunt(m);
-             
+
             }
-            
-                
-            
 
         }
     }
@@ -263,17 +305,19 @@ public class Bibliotheque implements Serializable {
             }
         }
     }
-     public void relancerLecteur(){
-          EntreesSorties.afficherMessage("Relance des lecteurs en retard en cours.");
-          for(Emprunt m : getEmprunts()){
-              
-              m.relancerLecteur();
-          }
-           EntreesSorties.afficherMessage("Relance des lecteurs en retard terminée.");
-}
-      private ArrayList<Emprunt> getEmprunts(){
-          return this.listeEmprunts;
-      }
+
+    public void relancerLecteur() {
+        EntreesSorties.afficherMessage("Relance des lecteurs en retard en cours.");
+        for (Emprunt m : getEmprunts()) {
+
+            m.relancerLecteur();
+        }
+        EntreesSorties.afficherMessage("Relance des lecteurs en retard terminée.");
+    }
+
+    private ArrayList<Emprunt> getEmprunts() {
+        return this.listeEmprunts;
+    }
 
     // -----------------------------------------------
     //                     Ouvrage
@@ -461,17 +505,17 @@ public class Bibliotheque implements Serializable {
 
     public void consulterExemplaireOuvrage() {
         int ISBN = EntreesSorties.lireEntier("Entrez l'ISBN de l'ouvrage dont vous voulez les exemplaires : ");
-     
+
         Ouvrage ouvrage = getOuvrage(ISBN);
         while (ouvrage == null && ISBN != 0) {
             ISBN = EntreesSorties.lireEntier("Ceci n'est pas un ISBN valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
             ouvrage = getOuvrage(ISBN);
-            if(ouvrage!=null){
+            if (ouvrage != null) {
                 ouvrage.afficherReduit();
                 ouvrage.afficherExemplaire();
             }
-            }
-        
+        }
+
     }
 
     public Boolean comparerDateRSupDateP(GregorianCalendar dateReception, Ouvrage o) {
@@ -488,10 +532,4 @@ public class Bibliotheque implements Serializable {
         }
     }
 
-
 }
-  
-
-
-
-
