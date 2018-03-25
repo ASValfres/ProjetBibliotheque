@@ -164,7 +164,7 @@ public class Bibliotheque implements Serializable {
         boolean w = false;
         Lecteur l = null;
         Exemplaire e = null;
-        Emprunt m = null;
+        Emprunt m;
 
         int ISBN = EntreesSorties.lireEntier("Entrez un numéro ISBN :");
         Ouvrage o = this.getOuvrage(ISBN);
@@ -191,6 +191,7 @@ public class Bibliotheque implements Serializable {
                         EntreesSorties.afficherMessage("Ce lecteur a déjà trop d'emprunts !");
                     } else {                 
                         if (o.exemplaireDispo(numeroExemplaire)) {
+                            e = o.getExemplairePrecis(numeroExemplaire);
                             if (e.exemplaireDispo()) {
                                 w = true;
                             } else {
