@@ -92,25 +92,37 @@ public class Ouvrage implements Serializable {
         this.lierExemplaireOuvrage(e);
     }
 
-    public boolean exemplaireDispo(int numeroExemplaire) {
-        Exemplaire e = this.getExemplairePrecis(numeroExemplaire);
-        int fin =0;
+public boolean exemplaireDispo(int numeroExemplaire) {
+        Exemplaire e ;
+        int fin = 0;
 
-        while (fin==0) {
-            fin=1;
-            while (e == null && numeroExemplaire != 0) {
+        while (fin == 0) {
+            e = this.getExemplairePrecis(numeroExemplaire);
+
+            if (e == null) {
                 numeroExemplaire = EntreesSorties.lireEntier("Ceci n'est pas un numéro d'exemplaire valide. \nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                e = this.getExemplairePrecis(numeroExemplaire);
-                fin=0;
+
+
+            }
+            if (e != null) {
+                if (e.getEmprunt() != null) {
+                    numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
+
+
+
+                }
+                if (e != null && e.getEmprunt() == null) {
+                        fin = 1;
+                    }
+            }
+            if (numeroExemplaire == 0) {
+                fin = 2;
             }
 
-            while (numeroExemplaire != 0 && e.getEmprunt() != null) {
-                numeroExemplaire = EntreesSorties.lireEntier("Ceci est un exemplaire déjà emprunté.\nEntrez un numéro d'exemplaire, ou entrez 0 pour annuler :");
-                e = this.getExemplairePrecis(numeroExemplaire);
-                fin=0;
-            }
+
+
         }
-        if (e != null) {
+        if (fin == 1) {
             return true;
         }
         return false;
