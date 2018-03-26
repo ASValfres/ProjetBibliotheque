@@ -65,6 +65,7 @@ public class Exemplaire implements Serializable {
     
     public void consulterEmpruntsLecteur(){
         this.getOuvrage().afficherReduit();
+        EntreesSorties.afficherMessage("N° Exemplaire : " + this.numeroexemplaire+"." );
         
     }
     public void afficherInfos(){
