@@ -510,11 +510,12 @@ public class Bibliotheque implements Serializable {
         while (ouvrage == null && ISBN != 0) {
             ISBN = EntreesSorties.lireEntier("Ceci n'est pas un ISBN valide. \nEntrez un numéro de lecteur, ou entrez 0 pour annuler :");
             ouvrage = getOuvrage(ISBN);
-            if (ouvrage != null) {
+            
+        }
+        if (ouvrage != null) {
                 ouvrage.afficherReduit();
                 ouvrage.afficherExemplaire();
             }
-        }
 
     }
 
