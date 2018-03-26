@@ -24,8 +24,8 @@ public class Emprunt implements Serializable {
     public Emprunt(Lecteur lecteur, Exemplaire exemplaire) {
         this.lecteur = lecteur;
         this.exemplaire = exemplaire;
-        //  this.dateEmprunt = new GregorianCalendar();
-        this.dateEmprunt = EntreesSorties.lireDate("Date d'Emprunt ?");
+        this.dateEmprunt = new GregorianCalendar();
+        //this.dateEmprunt = EntreesSorties.lireDate("Date d'Emprunt ?");
         this.dateRelance = null;
     }
 
